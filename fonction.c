@@ -4,10 +4,18 @@
 #include <time.h>
 
 
-void generation_solution(taille, ) {
+int** creation_matrice(int taille) {
     // Matrice Takuzu solution
-    int* taku_sol = NULL;
-//    taku_sol = (int*) malloc(taill)
+    int** taku_lig = (int**) malloc(taille * sizeof (int));
+    for (int i = 0; i < taille; ++i) {
+        int* taku_col = (int*) malloc(taille * sizeof(int));
+        taku_lig[i] = taku_col;
+    }
+    return taku_lig;
+}
+
+void generation_solution(){
+    
 }
 
 
