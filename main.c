@@ -43,10 +43,10 @@ void menu()
 {
     int choice = -1;
     do {
-        printf("Welcome in Takuzu. Please choose a menu : \n"
-               "1 - Play on a grid.\n"
-               "2 - Solve automatically a grid of Takuzu.\n"
-               "3 - Generate a grid of Takuzu.\n"
+        printf("Bienvenu dans le jeux du Takuzu. Choisissez votre menu : \n"
+               "1 - Resoudre une grille.\n"
+               "2 - Resoudre automatiquement une grille  de Takuzu.\n"
+               "3 - Generer une grille de Takuzu.\n"
                "4 - Exit\n");
         scanf("%d", &choice);
         switch (choice) {
@@ -67,10 +67,10 @@ void menu()
             }
             case 4:
             {
-                printf("Exiting menu...");
+                printf("Sortie du menu...");
                 break;
             }
-            default: printf("Choice not available. Please try again.\n");
+            default: printf("Choix non valide. SVP essayez a nouveau.\n");
         }
     } while (choice != 4);
 }
