@@ -3,7 +3,8 @@
 
 int** creation_matrice(int);
 void libere_matrice(int, int**);
-void generation_solution(int);
+int verification_cote(int, int, int, int, int**);
+void generation_solution(int, int**);
 void creer_masque();
 void takuzu_utilisateur();
 

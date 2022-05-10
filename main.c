@@ -1,4 +1,8 @@
 #include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+#include "fonction.h"
+
 
 void welcome();
 /*
@@ -15,6 +19,8 @@ void menu();
  */
 
 int main() {
+    // initialisation de la seed sur le temps
+    srand(time(NULL));
 
     // Welcome message
     welcome();
@@ -23,7 +29,6 @@ int main() {
 
     // Select menu
     menu();
-
 
     return 0;
 }
