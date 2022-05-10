@@ -25,12 +25,12 @@ void libere_matrice(int taille, int** taku_lig){
 
 int verification_cote (int val, int taille, int pos_i, int pos_j, int** taku_lig) {
     // première boucle i = 4 pour vérification sur les quatres directions (haut,bas,droite,gauche)
-    int temp = 0, cpt = 0, verif = TRUE;
+    int j, temp = 0, cpt = 0;
     for (int i = 0; i < 4; ++i) {
         switch (i) {
             case 0:{
                 // haut
-                for (int j = pos_i - 1; j >= 0; --j) {
+                for (j = pos_i - 1; j >= 0; --j) {
                     // pas besoin de verifier plus loin que 2 cases
                     if (cpt > 2){
                         break;
@@ -43,35 +43,94 @@ int verification_cote (int val, int taille, int pos_i, int pos_j, int** taku_lig
                             temp += 1;
                         }
                     }
-                    // verification pour 2 identiques au-dessus
+                    // verification pour 2 identiques
                     if (temp == 2){
                         return FALSE;
                     }
                     cpt += 1;
                 }
-                temp = 0;
                 cpt = 0;
                 break;
             }
 
             case 1:{
                 // bas
+                for (j = pos_i + 1; j < taille; ++j) {
+                    // pas besoin de verifier plus loin que 2 cases
+                    if (cpt > 2){
+                        break;
+                    }
+                    if (taku_lig[j][pos_j] != val){
+                        break;
+                    }
+                    else {
+                        if (taku_lig[j][pos_j] == val){
+                            temp += 1;
+                        }
+                    }
+                    // verification pour 2 identiques
+                    if (temp == 2){
+                        return FALSE;
+                    }
+                    cpt += 1;
+                }
+                cpt = 0;
+                temp = 0;
                 break;
             }
 
             case 2:{
                 //gauche
+                for (j = pos_j - 1; j >= 0; --j) {
+                    // pas besoin de verifier plus loin que 2 cases
+                    if (cpt > 2){
+                        break;
+                    }
+                    if (taku_lig[pos_i][j] != val){
+                        break;
+                    }
+                    else {
+                        if (taku_lig[pos_i][j] == val){
+                            temp += 1;
+                        }
+                    }
+                    // verification pour 2 identiques
+                    if (temp == 2){
+                        return FALSE;
+                    }
+                    cpt += 1;
+                }
+                cpt = 0;
                 break;
             }
 
             case 3:{
                 // droite
+                for (j = pos_j + 1; j < taille; ++j) {
+                    // pas besoin de verifier plus loin que 2 cases
+                    if (cpt > 2){
+                        break;
+                    }
+                    if (taku_lig[pos_i][j] != val){
+                        break;
+                    }
+                    else {
+                        if (taku_lig[pos_i][j] == val){
+                            temp += 1;
+                        }
+                    }
+                    // verification pour 2 identiques
+                    if (temp == 2){
+                        return FALSE;
+                    }
+                    cpt += 1;
+                }
+                cpt = 0;
                 break;
             }
         }
     }
-    
-    
+    return TRUE;
 }
 
 
