@@ -5,7 +5,8 @@
 
 
 int** creation_matrice(int taille) {
-    // Matrice Takuzu solution
+    // Création d'une matrice carrée
+    // taku_lig représente les lignes de la matrice, autrement dit la porte d'entrée
     int** taku_lig = (int**) malloc(taille * sizeof (int));
     for (int i = 0; i < taille; ++i) {
         int* taku_col = (int*) malloc(taille * sizeof(int));
@@ -14,8 +15,19 @@ int** creation_matrice(int taille) {
     return taku_lig;
 }
 
-void generation_solution(){
+void libere_matrice(int taille, int** taku_lig){
+    // Free de la matrice carrée
+    // taku_lig représente les lignes de la matrice, autrement dit la porte d'entrée
+    for (int i = 0; i < taille; ++i) {
+        free(taku_lig[i]);
+        taku_lig[i] = NULL;
+    }
+    free(taku_lig);
+    taku_lig = NULL;
+}
 
+void generation_solution(int taille){
+    // Matrice Takuzu solution
 }
 
 
