@@ -24,6 +24,7 @@ void libere_matrice(int taille, int** taku_lig){
 }
 
 int verification_cote (int val, int taille, int pos_i, int pos_j, int** taku_lig) {
+    // Regarde si la règle de pas plus de 2 chiffes identiques côte à côte est respectée
     // première boucle i = 4 pour vérification sur les quatres directions (haut,bas,droite,gauche)
     int j, temp = 0, cpt = 0;
     for (int i = 0; i < 4; ++i) {
@@ -133,7 +134,15 @@ int verification_cote (int val, int taille, int pos_i, int pos_j, int** taku_lig
     return TRUE;
 }
 
+void verification_lig_col(){
+    // Vérifie aucunes lignes et colonnes sont identiques
 
+}
+
+void verification_nb_iden(){
+    // Vérifie s'il y a le même nombre de 0 et de 1 dans la ligne ou la colonne
+
+}
 
 void generation_solution(int taille, int** taku_lig){
     // Matrice solution du Takuzu
