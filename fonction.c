@@ -25,7 +25,7 @@ void libere_matrice(int taille, int** taku_lig){
 
 int verification_cote (int val, int taille, int pos_i, int pos_j, int** taku_lig) {
     // Regarde si la règle de pas plus de 2 chiffes identiques côte à côte est respectée
-    // première boucle i = 4 pour vérification sur les quatres directions (haut,bas,droite,gauche)
+    // première boucle i = 4 pour vérification sur les quatre directions (haut,bas,droite,gauche)
     int j, temp = 0, cpt = 0;
     for (int i = 0; i < 4; ++i) {
         switch (i) {
