@@ -20,10 +20,8 @@ void libere_matrice(int taille, int** taku_lig){
     // taku_lig représente les lignes de la matrice, autrement dit la porte d'entrée
     for (int i = 0; i < taille; ++i) {
         free(taku_lig[i]);
-        taku_lig[i] = NULL;
     }
     free(taku_lig);
-    taku_lig = NULL;
 }
 
 void generation_solution(int taille){
