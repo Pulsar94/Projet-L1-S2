@@ -6,7 +6,15 @@
 
 
 int** creation_matrice(int taille) {
-    // Création d'une matrice carrée
+    /*
+     * Fonction: creation_matrice
+     * -------------------
+     * Création d'une matrice carrée en fonction de la taille donnée pour insérer les données du takuzu
+     *
+     * taille: taille de la matrice
+     *
+     * return: pointeur sur le tableau
+     */
     int** taku_lig = (int**) malloc(taille * sizeof (int));
     for (int i = 0; i < taille; ++i) {
         int* taku_col = (int*) malloc(taille * sizeof(int));
@@ -16,7 +24,11 @@ int** creation_matrice(int taille) {
 }
 
 void libere_matrice(int taille, int** taku_lig){
-    // Free de la matrice carrée
+    /*
+     * Fonction: libère matrice
+     * -------------------
+     * Libère la matrice du Takuzu reservée précédemment par le malloc
+     */
     for (int i = 0; i < taille; ++i) {
         free(taku_lig[i]);
     }
