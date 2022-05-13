@@ -1,5 +1,5 @@
-#ifndef PROJET_L1_S2_FONCTION_H
-#define PROJET_L1_S2_FONCTION_H
+#ifndef PROJET_L1_S2_MATRICE_H
+#define PROJET_L1_S2_MATRICE_H
 
 int** creation_matrice(int);
 void libere_matrice(int, int**);
@@ -10,4 +10,4 @@ void generation_solution(int, int**);
 void creer_masque();
 void takuzu_utilisateur();
 
-#endif //PROJET_L1_S2_FONCTION_H
+#endif //PROJET_L1_S2_MATRICE_H

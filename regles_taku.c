@@ -1,39 +1,12 @@
-#include "fonction.h"
+//
+// noms des créateurs
+//
+
+#include "regles_taku.h"
 #include <stdio.h>
 #include <stdlib.h>
 #define TRUE 1
 #define FALSE 0
-
-
-int** creation_matrice(int taille) {
-    /*
-     * Fonction: creation_matrice
-     * -------------------
-     * Création d'une matrice carrée en fonction de la taille donnée pour insérer les données du takuzu
-     *
-     * taille: taille de la matrice
-     *
-     * return: pointeur sur le tableau
-     */
-    int** taku_lig = (int**) malloc(taille * sizeof (int));
-    for (int i = 0; i < taille; ++i) {
-        int* taku_col = (int*) malloc(taille * sizeof(int));
-        taku_lig[i] = taku_col;
-    }
-    return taku_lig;
-}
-
-void libere_matrice(int taille, int** taku_lig){
-    /*
-     * Fonction: libère matrice
-     * -------------------
-     * Libère la matrice du Takuzu reservée précédemment par le malloc
-     */
-    for (int i = 0; i < taille; ++i) {
-        free(taku_lig[i]);
-    }
-    free(taku_lig);
-}
 
 int verification_cote (int val, int taille, int pos_i, int pos_j, int** taku_lig) {
     // Regarde si la règle de pas plus de 2 chiffes identiques côte à côte est respectée
@@ -155,26 +128,3 @@ void verification_nb_iden(){
     // Vérifie s'il y a le même nombre de 0 et de 1 dans la ligne ou la colonne
 
 }
-
-void generation_solution(int taille, int** taku_lig){
-    // Matrice solution du Takuzu
-    for (int i = 0; i < taille; ++i) {
-        for (int j = 0; j < taille; ++j) {
-            taku_lig[i][j] = rand() % 2;
-            if (NULL) {
-                // besoin de coder les conditions avant de remplir la matrice
-            }
-        }
-    }
-}
-
-
-void creer_masque() {
-    // Masque qui détermine l'affichage Takuzu utilisateur
-}
-
-void takuzu_utilisateur() {
-    // Takuzu visible par l'utilisateur
-
-}
-
