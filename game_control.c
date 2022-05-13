@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "affichage.h"
+#include "game_control.h"
 
 #define TRUE 1
 #define FALSE 0
