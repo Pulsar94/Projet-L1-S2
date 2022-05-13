@@ -55,6 +55,7 @@ void creer_masque() {
 
 void takuzu_utilisateur() {
     // Takuzu visible par l'utilisateur
+    // mettre -1 pour les cases vides, non visible par l'utilisateur mais pour éviter confusion par la machine
 
 }
 

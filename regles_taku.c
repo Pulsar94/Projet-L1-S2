@@ -124,7 +124,7 @@ void verification_lig_col(){
 
 }
 
-void verification_nb_iden(){
+void verification_nb_iden(int taille){
     // Vérifie s'il y a le même nombre de 0 et de 1 dans la ligne ou la colonne
 
 }

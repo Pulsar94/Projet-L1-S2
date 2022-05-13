@@ -8,7 +8,7 @@
 
 int verification_cote (int, int, int, int, int**);
 void verification_lig_col();
-void verification_nb_iden();
+void verification_nb_iden(int);
 
 
 #endif //PROJET_L1_S2_REGLES_TAKU_H
