@@ -4,6 +4,31 @@
 #define TRUE 1
 #define FALSE 0
 
+int** creation_mat_modele(int taille){
+    if (taille == 4){
+        int matrice4[4][4] = {{1,0,0,1},
+                              {1,0,1,0},
+                              {0,1,1,0},
+                              {0,1,0,1}};
+
+    } else{
+        if (taille == 8){
+            int matrice8[8][8] = {{1,0,1,1,0,1,0,0},
+                                  {1,0,1,0,1,0,0,1},
+                                  {0,1,0,1,1,0,1,0},
+                                  {0,1,0,1,0,1,1,0},
+                                  {1,0,1,0,0,1,0,1},
+                                  {0,1,0,0,1,0,1,1},
+                                  {0,0,1,1,0,1,1,0},
+                                  {1,1,0,0,1,0,0,1}};
+
+        }
+    }
+    // faire un malloc avec remplissage des matrices du dessus pour pouvoir passer l'adresse dans le main
+}
+
+
+
 
 int** creation_matrice(int taille) {
     /*
