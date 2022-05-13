@@ -2,6 +2,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include "matrice.h"
+#include "game_control.h"
 
 
 void welcome();
@@ -48,10 +49,10 @@ void menu()
 {
     int choice = -1;
     do {
-        printf("Bienvenu dans le jeux du Takuzu. Choisissez votre menu : \n"
-               "1 - Resoudre une grille.\n"
-               "2 - Resoudre automatiquement une grille  de Takuzu.\n"
-               "3 - Generer une grille de Takuzu.\n"
+        printf("Bienvenue dans le jeux du Takuzu. Choisissez votre menu : \n"
+               "1 - Résoudre une grille.\n"
+               "2 - Résoudre automatiquement une grille  de Takuzu.\n"
+               "3 - Generate une grille de Takuzu.\n"
                "4 - Exit\n");
         scanf("%d", &choice);
         switch (choice) {
