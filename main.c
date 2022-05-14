@@ -4,6 +4,8 @@
 #include "matrice.h"
 #include "game_control.h"
 
+#define TRUE 1
+#define FALSE 0
 
 void welcome();
 /*
