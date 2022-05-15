@@ -115,8 +115,22 @@ void generation_solution(int taille, int** taku_lig){
                             nbr = nbr/2;
                         }
                     }
-                } while (verification_ligne_sol(code_binaire, taille) == FALSE);
+                } while ((verification_ligne_sol(code_binaire, taille) == FALSE) || (verification_nombre_sol_lig(taille, code_binaire) == FALSE));
                 matrice_sol[k] = code_binaire;
+                if ((verification_colonne_sol(matrice_sol, taille) == FALSE) || verification_nombre_sol_col(taille, matrice_sol) == FALSE){
+                    do {
+                        nbr = rand() % 16;
+                        for (i = 0; i < taille; ++i) {
+                            // conversion en binaire dans le tableau
+                            for(j = 0; nbr > 0; j++)
+                            {
+                                code_binaire[j] = nbr % 2;
+                                nbr = nbr/2;
+                            }
+                        }
+                    } while (verification_ligne_sol(code_binaire, taille) == FALSE);
+                    matrice_sol[k] = code_binaire;
+                }
             }
             break;
 
