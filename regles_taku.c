@@ -414,24 +414,20 @@ int verification_nombre_sol_lig(int taille, int* taku_sol){
     int cpt = 0;
     // *********************** LIGNE ***********************
     for (int i = 0; i < taille; ++i) {
-        for (int j = 0; j < taille; ++j) {
-            if (0 == taku_sol[j][i]){
-                cpt += 1;
-            }
-            if (cpt >= (taille/2)){
-                return FALSE;
-            }
+        if (taku_sol[i] == 0){
+            cpt += 1;
+        }
+        if (cpt >= (taille/2)){
+            return FALSE;
         }
         cpt = 0;
     }
     for (int i = 0; i < taille; ++i) {
-        for (int j = 0; j < taille; ++j) {
-            if (1 == taku_sol[j][i]){
-                cpt += 1;
-            }
-            if (cpt >= (taille/2)){
-                return FALSE;
-            }
+        if (taku_sol[i] == 1){
+            cpt += 1;
+        }
+        if (cpt >= (taille/2)){
+            return FALSE;
         }
         cpt = 0;
     }
