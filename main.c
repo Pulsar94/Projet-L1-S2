@@ -97,10 +97,10 @@ void freeplay_menu()
 {
     int choice = -1;
     do {
-        printf("\033[0;34mQuelle taille de grille souhaitez-vous ?\n\033[0mTailles disponible : \033[0;32m4\033[0m, \033[0;33m8, \033[0;31m16 \033[0m(Choisissez \033[0;36m0\033[0m pour revenir au menu principale)\n\033[0;34mChoix :\033[0m ");
+        printf("\033[0;34mQuelle taille de grille souhaitez-vous ?\n\033[0mTailles disponible : \033[0;32m4\033[0m, \033[0;33m8, \033[0;31m16 \033[0m(Choisissez \033[0;36m0\033[0m pour revenir au menu principal)\n\033[0;34mChoix :\033[0m ");
         scanf("%d", &choice);
 
-        if (choice == 4 || choice == 8)
+        if (choice == 4 || choice == 8 || choice == 16)
         {
             int** grille_solution = creation_mat_modele(choice);
             int** grille_jeu = creation_mat_modele(choice);
@@ -132,7 +132,7 @@ void freeplay_menu()
             }
         }*/
 
-    } while (!(choice == 4 || choice == 8 || choice == 0));
+    } while (!(choice == 4 || choice == 8 || choice == 16 || choice == 0));
     //printf("\n-+-+-+-+-+-+-+-+-+\nSortie du grid_menu().\n-+-+-+-+-+-+-+-+-+\n");
 }
 
@@ -140,10 +140,10 @@ void autoresolve_menu()
 {
     int choice = -1;
     do {
-        printf("\033[0;34mQuelle taille de grille souhaitez-vous ?\n\033[0mTailles disponible : \033[0;32m4\033[0m, \033[0;33m8, \033[0;31m16 \033[0m(Choisissez \033[0;36m0\033[0m pour revenir au menu principale)\n\033[0;34mChoix :\033[0m ");
+        printf("\033[0;34mQuelle taille de grille souhaitez-vous ?\n\033[0mTailles disponible : \033[0;32m4\033[0m, \033[0;33m8, \033[0;31m16 \033[0m(Choisissez \033[0;36m0\033[0m pour revenir au menu principal)\n\033[0;34mChoix :\033[0m ");
         scanf("%d", &choice);
 
-        if (choice == 4 || choice == 8)
+        if (choice == 4 || choice == 8 || choice == 16)
         {
             int** grille_solution = creation_mat_modele(choice);
             int** grille_jeu = creation_mat_modele(choice);
@@ -174,14 +174,14 @@ void autoresolve_menu()
             }
         }*/
 
-    } while (!(choice == 4 || choice == 8 || choice == 0));
+    } while (!(choice == 4 || choice == 8 || choice == 16 || choice == 0));
 }
 
 void autogenerate_grid_menu()
 {
     int choice = -1;
     do {
-        printf("\033[0;34mQuelle taille de grille souhaitez-vous ?\n\033[0mTailles disponible : \033[0;32m4\033[0m, \033[0;33m8, \033[0;31m16 \033[0m(Choisissez \033[0;36m0\033[0m pour revenir au menu principale)\n\033[0;34mChoix :\033[0m ");
+        printf("\033[0;34mQuelle taille de grille souhaitez-vous ?\n\033[0mTailles disponible : \033[0;32m4\033[0m, \033[0;33m8, \033[0;31m16 \033[0m(Choisissez \033[0;36m0\033[0m pour revenir au menu principal)\n\033[0;34mChoix :\033[0m ");
         scanf("%d", &choice);
 
         if (choice == 4 || choice == 8)
