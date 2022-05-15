@@ -33,6 +33,8 @@ int main() {
     // Select menu
     menu();
 
+    printf("\n\n-+-+-+-+-+-+-+-+-+\nSortie du programme.\n-+-+-+-+-+-+-+-+-+\n");
+
     return 0;
 }
 
@@ -53,8 +55,8 @@ void menu()
     do {
         printf("Bienvenue dans le jeux du Takuzu. Choisissez votre menu : \n"
                "1 - Résoudre une grille.\n"
-               "2 - Résoudre automatiquement une grille  de Takuzu.\n"
-               "3 - Generate une grille de Takuzu.\n"
+               "2 - Résoudre automatiquement une grille de Takuzu.\n"
+               "3 - Génère une grille de Takuzu.\n"
                "4 - Exit\n");
         scanf("%d", &choice);
         switch (choice) {
