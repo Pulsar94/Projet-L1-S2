@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "regles_taku.h"
 #include "game_control.h"
 
 #define TRUE 1
@@ -127,6 +128,7 @@ int input_into_matrice(int**tab, int x, char y_char, int val, int taille)
   if ((y != -1) && (verif_legal_input(taille, x, y, val) == TRUE))
   {
     tab[x][y] = val;
+    // function verif();
     return TRUE;
   }
   return FALSE;
