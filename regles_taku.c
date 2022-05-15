@@ -124,7 +124,20 @@ void verification_lig_col(){
 
 }
 
-void verification_nb_iden(int taille, int pos_i, int pos_j, int** taku_lig){
+void verification_nb_iden(int taille, int pos_i, int pos_j, int val, int** taku_lig){
     // Vérifie s'il y a le même nombre de 0 et de 1 dans la ligne ou la colonne
-
+    int cpt = 0;
+    for (int i = 0; i < taille; ++i) {
+        if (val == taku_lig[i][pos_j]){
+            cpt += 1;
+        }
+        // voire si faire un break quand cpt > taille/2
+    }
+    // reinitialiser cpt à 0
+    for (int j = 0; j < taille; ++j) {
+        if (val == taku_lig[pos_i][j]){
+            cpt += 1;
+        }
+        // voire si faire un break quand cpt > taille/2
+    }
 }
