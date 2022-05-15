@@ -34,28 +34,26 @@ void auto_resolve(int** tab_game, int** tab_solution, int taille, int player)
             h = 0;
             bool_input_matrice = FALSE;
             affichage_matrice(tab_game, taille, 1);
-                do {
-                    printf("\nInjection dans la matrice => coords: %c %d valeur: %d", alpha_maj[j], i, h);
-                    bool_input_matrice = input_into_matrice(tab_game, tab_solution, i, alpha_maj[j], h, taille, indice);
-                    if (bool_input_matrice == CORRECT) // COUP CORRECT ?
+            do {
+                printf("\nInjection dans la matrice => coords: %c %d valeur: %d", alpha_maj[j], i, h);
+                bool_input_matrice = input_into_matrice(tab_game, tab_solution, i, alpha_maj[j], h, taille, indice);
+                if (bool_input_matrice == CORRECT) // COUP CORRECT ?
+                {
+                    printf("-+-+-+-+-+ COUP CORRECT !-+-+-+-+-+\n");
+                } else {
+                    if (bool_input_matrice == INCORECT) // COUP INCORRECT ?
                     {
-                        printf("-+-+-+-+-+ COUP CORRECT !-+-+-+-+-+\n");
-                    } else {
-                        if (bool_input_matrice == INCORECT) // COUP INCORRECT ?
-                        {
-                            printf("\033[1;31m-+-+-+-+-+ COUP INCORRECT !-+-+-+-+-+\nIl ne respecte pas les règles du Takuzu !\n\033[0m");
-                            recherche_indice(indice, TRUE);
-                            h++;
-                        } else // COUP VALIDE
-                        {
-                            printf("-+-+-+-+-+ COUP VALIDE !-+-+-+-+-+\n Il respecte les règles du Takuzu mais n'est pas la solution.\n");
-                            h++;
-                        }
+                        printf("\033[1;31m-+-+-+-+-+ COUP INCORRECT !-+-+-+-+-+\nIl ne respecte pas les règles du Takuzu !\n\033[0m");
+                        recherche_indice(indice, TRUE);
+                        h++;
+                    } else // COUP VALIDE
+                    {
+                        printf("-+-+-+-+-+ COUP VALIDE !-+-+-+-+-+\n Il respecte les règles du Takuzu mais n'est pas la solution.\n");
+                        h++;
                     }
-                    affichage_matrice(tab_game, taille, 1);
-                    sleep(1);
-                } while (bool_input_matrice != CORRECT);
-            //}
+                }
+                affichage_matrice(tab_game, taille, 1);
+            } while (bool_input_matrice != CORRECT);
         }
     }
     // VERIF ENDGAME
