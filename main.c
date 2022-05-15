@@ -141,7 +141,7 @@ int masque_menu()
         printf("\033[0;34mVeuillez choisir un type de masque.\033[0m\n"
                "1. Masque manuellement saisie.\n"
                "2. Masque aléatoire.\n"
-               "\033[0;34mChoix :\033[0m \n");
+               "\033[0;34mChoix :\033[0m ");
         scanf("%d", &choice_masque);
 
         if (!(choice_masque == 1 || choice_masque == 2))
