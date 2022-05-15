@@ -345,7 +345,7 @@ int grille_pleine(int** tab_sol, int**tab_game, int taille)
 }
 
 int verification_ligne_sol(int* tab_sol, int taille, int val){
-    int cpt = 0, i, j, temp = -2;
+    int cpt = 0, i, temp = -2;
     for (i = 0; i < taille; ++i) {
         if (tab_sol[i] == temp) {
             cpt++;
