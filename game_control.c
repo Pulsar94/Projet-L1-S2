@@ -159,20 +159,28 @@ int input_into_matrice(int**tab, int x, char y_char, int val, int taille)
   }
   return FALSE;
 }
-
+int sortie_de_zone_input(char y_char, int x, int val)
+{
+    if ((y_char == 'z' || y_char == 'Z') && x == 0 && val == 0)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+//
 void game(int** tab_game, int**tab_solu, int taille)
 {
     int resolved = FALSE, HP = 3;
+    char y;
+    int x, val;
     do
     {
-        char y;
-        int x, val, i = 0;
         affichage_matrice(tab_game, taille, 1);
-        printf("\nSaisir une valeur à injecter sous la forme \nCOLONNE(LETTRE) LIGNE(CHIFFRE) 0/1(VALEUR) : ");
+        printf("\nSaisir une valeur à injecter sous la forme \nCOLONNE(LETTRE) LIGNE(CHIFFRE) 0/1(VALEUR)\nPour sortir du jeu, entrez Z 0 0\nChoix : ");
         scanf(" %c %d %d", &y, &x, &val);
 
         // VERIF IF INPUT IS LEGAL OR NOT
-        if ((input_into_matrice(tab_game, x, y, val, taille)) == FALSE)
+        if (((input_into_matrice(tab_game, x, y, val, taille)) == FALSE) && (sortie_de_zone_input(y, x, val) == FALSE) )
         {
             printf("\nSaisie illégale\n");
         }
@@ -197,10 +205,14 @@ void game(int** tab_game, int**tab_solu, int taille)
         }*/
         HP = 0;
 
-    } while(resolved == FALSE && HP < 0);
+    } while((resolved == FALSE && HP < 0) || sortie_de_zone_input(y, x, val) == FALSE);
     if (HP == 0)
     {
         printf("\n-+-+-+-+-+-+-+-+-+\nGAME LOST\n-+-+-+-+-+-+-+-+-+\n");
+    }
+    else if (sortie_de_zone_input(y, x, val) == TRUE)
+    {
+        printf("\n-+-+-+-+-+-+-+-+-+\nFIN DU JEU\n-+-+-+-+-+-+-+-+-+\n");
     }
     else if (resolved == TRUE)
     {
