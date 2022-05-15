@@ -5,6 +5,7 @@
 
 #include "matrice.h"
 #include "game_control.h"
+#include "auto_resolve.h"
 
 #define TRUE 1
 #define FALSE 0
@@ -22,8 +23,9 @@ void main_menu();
  * -----------------
  * Menu principal, l'utilisateur à trois choix possible
  */
-void grid_menu();
+void freeplay_menu();
 int masque_menu();
+void autoresolve_menu();
 
 int main() {
     // initialisation de la seed sur le temps
@@ -68,7 +70,7 @@ void main_menu()
         switch (choice) {
             case 1:
             {
-                grid_menu();
+                freeplay_menu();
                 break;
             }
             case 2:
@@ -90,7 +92,7 @@ void main_menu()
     } while (choice != 4);
 }
 
-void grid_menu()
+void freeplay_menu()
 {
     int choice = -1;
     do {
@@ -110,12 +112,13 @@ void grid_menu()
             printf("\n-+-+-+-+-+-+-+-^^ MASQUE ^^-+-+-+-+-+-+-+-+-\n");
 
 
-            game(grille_jeu, grille_solution, choice, TRUE);
+            game(grille_jeu, grille_solution, choice);
             sleep(3); // Cooldown : 3 sec le temps qu'il regarde sa grille
             printf("Retour au ");
             libere_matrice(choice, grille_jeu);
             libere_matrice(choice, grille_solution);
         }
+        /*
         else {
             if (choice == 16) {
                 printf("\n\033[0;31m*Zone pas encore terminée*\n");
@@ -126,10 +129,51 @@ void grid_menu()
                     printf("Taille indisponible ou non reconnue. Veuillez réessayer.\n");
                 }
             }
-        }
+        }*/
 
     } while (!(choice == 4 || choice == 8 || choice == 0));
     //printf("\n-+-+-+-+-+-+-+-+-+\nSortie du grid_menu().\n-+-+-+-+-+-+-+-+-+\n");
+}
+
+void autoresolve_menu()
+{
+    int choice = -1;
+    do {
+        printf("\033[0;34mQuelle taille de grille souhaitez-vous ?\n\033[0mTailles disponible : \033[0;32m4\033[0m, \033[0;33m8, \033[0;31m16 \033[0m(Choisissez \033[0;36m0\033[0m pour revenir au menu principale)\n\033[0;34mChoix :\033[0m ");
+        scanf("%d", &choice);
+
+        if (choice == 4 || choice == 8)
+        {
+            int** grille_solution = creation_mat_modele(choice);
+            int** grille_jeu = creation_mat_modele(choice);
+
+            int choice_masque = masque_menu();
+
+            printf("\n-+-+-+-+-+-+-+-+-+ MASQUE -+-+-+-+-+-+-+-+-+\n");
+            int** grille_masque = takuzu_utilisateur(grille_solution, grille_jeu, choice, choice_masque);
+            affichage_matrice(grille_masque, choice, 2);
+            printf("\n-+-+-+-+-+-+-+-^^ MASQUE ^^-+-+-+-+-+-+-+-+-\n");
+
+            auto_resolve(grille_jeu, grille_solution, choice, TRUE);
+
+            printf("Retour au ");
+            libere_matrice(choice, grille_jeu);
+            libere_matrice(choice, grille_solution);
+        }
+        /*
+        else {
+            if (choice == 16) {
+                printf("\n\033[0;31m*Zone pas encore terminée*\n");
+            } else {
+                if (choice == 0) {
+                    printf("Sortie en cours...\n");
+                } else {
+                    printf("Taille indisponible ou non reconnue. Veuillez réessayer.\n");
+                }
+            }
+        }*/
+
+    } while (!(choice == 4 || choice == 8 || choice == 0));
 }
 
 int masque_menu()

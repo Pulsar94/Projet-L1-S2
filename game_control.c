@@ -189,18 +189,13 @@ int sortie_de_zone_input(char y_char, int x, int val)
     return FALSE;
 }
 //
-void game(int** tab_game, int**tab_solu, int taille, int player)
+void game(int** tab_game, int**tab_solu, int taille)
 {
     int resolved = FALSE;
-    int HP = 9999999; // Vie par défaut en cas de résolution automatique.
     char y;
     int x, val;
     int* indice = indice_init();
-
-    if (player == TRUE)
-    {
-        HP = 3;
-    }
+    int HP = 3;
 
     do
     {
@@ -219,7 +214,7 @@ void game(int** tab_game, int**tab_solu, int taille, int player)
         {
             printf("\nSortie du jeu...\n");
         }
-        else if (player == TRUE)
+        else
         {
             // VERIF IF INPUT IS VALID OR NOT
             if (bool_input_matrice == CORRECT) // COUP CORRECT ?
@@ -229,7 +224,7 @@ void game(int** tab_game, int**tab_solu, int taille, int player)
                 if (bool_input_matrice == INCORECT) // COUP INCORRECT ?
                 {
                     printf("\033[1;31m-+-+-+-+-+ COUP INCORRECT !-+-+-+-+-+\nIl ne respecte pas les règles du Takuzu !\n\033[0m");
-                    recherche_indice(indice);
+                    recherche_indice(indice, TRUE);
                     printf("\nVous perdez une vie. Points de vie actuel : %d\n", --HP);
                 } else // COUP VALIDE
                 {
