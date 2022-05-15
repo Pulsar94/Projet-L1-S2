@@ -154,7 +154,7 @@ int input_into_matrice(int**tab, int x, char y_char, int val, int taille)
   if ((y != -1) && (verif_legal_input(taille, x, y, val) == TRUE))
   {
       // function verif();
-      
+
       tab[x][y] = val;
       return TRUE;
   }

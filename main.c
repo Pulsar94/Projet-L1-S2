@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <unistd.h> // sleep function
 #include <time.h>
-#include <curses.h>
 
 #include "matrice.h"
 #include "game_control.h"
