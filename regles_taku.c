@@ -314,31 +314,16 @@ void modif_indice(int* indice, int index_indice, int val)
 
 int grille_pleine(int** tab_sol, int**tab_game, int taille)
 {
-    int i = 0, j = 0;
-    while(i < taille && i != -1 && j != -1)
+    int isCorrect = TRUE;
+    for (int i = 0; i < taille; i++)
     {
-        while(j < taille && i != -1 && j != -1)
+        for (int j = 0; j < taille; j++)
         {
-            if (tab_game[i][j] == -1)
+            if (tab_sol[i][j] != tab_game[i][j])
             {
-                i = -1; j = -1;
-            }
-            else
-            {
-                j++;
+                isCorrect = FALSE;
             }
         }
-        if (j != -1)
-        {
-            i++;
-        }
     }
-    if ((i > taille) && (j > taille))
-    {
-        return TRUE;
-    }
-    else
-    {
-        return FALSE;
-    }
+    return isCorrect;
 }

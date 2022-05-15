@@ -239,6 +239,11 @@ void game(int** tab_game, int**tab_solu, int taille, int player)
         }
 
         // VERIF ENDGAME
+        if (grille_pleine(tab_solu, tab_game, taille) == TRUE)
+        {
+            resolved = TRUE;
+        }
+
 
     } while(((HP > 0) && (resolved == FALSE)) && sortie_de_zone_input(y, x, val) != TRUE);
     if (sortie_de_zone_input(y, x, val) == TRUE)
@@ -253,7 +258,7 @@ void game(int** tab_game, int**tab_solu, int taille, int player)
     }
     else if (resolved == TRUE)
     {
-        printf("\n-+-+-+-+-+-+-+-+-+\nVictoire !\n Vous avez terminée la grile !\n-+-+-+-+-+-+-+-+-+\n");
+        printf("\n-+-+-+-+-+-+-+-+-+\nVictoire !\nVous avez terminée la grile !\n-+-+-+-+-+-+-+-+-+\n");
         printf("Grille solution :\n");
         affichage_matrice(tab_solu, taille, 1);
     }
