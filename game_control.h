@@ -6,6 +6,6 @@ int alpha_to_indice(char c, int taille);
 int input_into_matrice(int**tab_game, int** tab_solu, int x, char y_char, int val, int taille, int* indice);
 int verif_legal_input(int taille, int x, int y, int val);
 int sortie_de_zone_input(char y_char, int x, int val);
-void game(int** tab_game, int** tab_solu, int taille);
+void game(int** tab_game, int** tab_solu, int taille, int player);
 
 #endif

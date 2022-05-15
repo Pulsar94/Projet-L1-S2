@@ -189,12 +189,19 @@ int sortie_de_zone_input(char y_char, int x, int val)
     return FALSE;
 }
 //
-void game(int** tab_game, int**tab_solu, int taille)
+void game(int** tab_game, int**tab_solu, int taille, int player)
 {
-    int resolved = FALSE, HP = 3;
+    int resolved = FALSE;
+    int HP = 9999999; // Vie par défaut en cas de résolution automatique.
     char y;
     int x, val;
     int* indice = indice_init();
+
+    if (player == TRUE)
+    {
+        HP = 3;
+    }
+
     do
     {
         affichage_matrice(tab_game, taille, 1);
@@ -208,8 +215,12 @@ void game(int** tab_game, int**tab_solu, int taille)
         {
             printf("\nSaisie illégale\n");
         }
-        else {
-
+        else if (sortie_de_zone_input(y, x, val == TRUE))
+        {
+            printf("\nSortie du jeu...\n");
+        }
+        else if (player == TRUE)
+        {
             // VERIF IF INPUT IS VALID OR NOT
             if (bool_input_matrice == CORRECT) // COUP CORRECT ?
             {
@@ -236,17 +247,15 @@ void game(int** tab_game, int**tab_solu, int taille)
     }
     else if (HP == 0)
     {
-        printf("\n-+-+-+-+-+-+-+-+-+\nGAME LOST\n-+-+-+-+-+-+-+-+-+\n");
+        printf("\n-+-+-+-+-+-+-+-+-+\nPerdu ! \nVous n'avez plus de vie :c\n-+-+-+-+-+-+-+-+-+\n");
         printf("Grille solution :\n");
         affichage_matrice(tab_solu, taille, 1);
     }
     else if (resolved == TRUE)
     {
-        printf("\n-+-+-+-+-+-+-+-+-+\nGAME WIN\n-+-+-+-+-+-+-+-+-+\n");
+        printf("\n-+-+-+-+-+-+-+-+-+\nVictoire !\n Vous avez terminée la grile !\n-+-+-+-+-+-+-+-+-+\n");
         printf("Grille solution :\n");
         affichage_matrice(tab_solu, taille, 1);
     }
     supprime_indice(indice);
-    /*libere_matrice(taille, tab_game);
-    libere_matrice(taille, tab_solu);*/
 }
