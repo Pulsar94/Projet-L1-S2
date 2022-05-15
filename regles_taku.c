@@ -223,7 +223,7 @@ int verification_nb_iden(int taille, int pos_i, int pos_j, int val, int** taku_j
         if (val == taku_jeu[i][pos_j]){
             cpt += 1;
         }
-        if (cpt > (taille/2)){
+        if (cpt >= (taille/2)){
             return FALSE;
         }
     }
@@ -232,24 +232,84 @@ int verification_nb_iden(int taille, int pos_i, int pos_j, int val, int** taku_j
         if (val == taku_jeu[pos_i][j]){
             cpt += 1;
         }
-        if (cpt > (taille/2)){
+        if (cpt >= (taille/2)){
             return FALSE;
         }
     }
     return TRUE;
 }
 
-int verif_regles_taku(int** tab_game, int x, int y, int val, int taille)
+int verif_regles_taku(int** tab_game, int x, int y, int val, int taille, int* indice)
 {
-    if (verification_cote(val, taille, x, y, tab_game) == TRUE && verification_lig_col(taille, x, y, tab_game) == TRUE &&
-    verification_nb_iden(taille, x, y, val, tab_game) == TRUE)
+    if (verification_cote(val, taille, x, y, tab_game) == FALSE)
     {
-        return TRUE;
+        modif_indice(indice, 0, 1);
+        return FALSE;
+    }
+    else if (verification_lig_col(taille, x, y, tab_game) == FALSE)
+    {
+        modif_indice(indice, 1, 1);
+        return FALSE;
+
+    }
+    else if (verification_nb_iden(taille, x, y, val, tab_game) == FALSE)
+    {
+        modif_indice(indice, 2, 1);
+        return FALSE;
     }
     else
     {
-        return FALSE;
+        return TRUE;
     }
+}
+
+int* indice_init()
+/*
+ * Function indice_init()
+ * ----------------------
+ * Initialise la fonction avec un tableau dyn de val 0 et de taille 3
+ * Position 1: Règle verification_cote()
+ * Position 2: Règle verification_lig_col()
+ * Position 3: Règle verification_nb_iden()
+ *
+ * Si la valeur est à 0, c'est que la règle est pour l'instant respecté
+ * Si la valeur est à 1, la règle correspondante n'est pas respecté. Il faut donc transmettre la raison/indice au joueur.
+ *
+ * return: pointeur sur tableau
+ */
+{
+    int* indice = (int*) calloc(3, sizeof (int));
+    return indice;
+}
+
+void supprime_indice(int* indice)
+{
+    free(indice);
+}
+
+void recherche_indice(int* indice)
+{
+    if (indice[0] == 1)
+    {
+        printf("\nAttention ! La règle suivante n'est pas respectée : \033[0;31mDans une ligne ou une colonne, il ne peut y avoir plus de deux 0 ou deux 1 à la suite (on ne peut pas avoir\n"
+               "trois 0 de suite ou trois 1 de suite).\033[0m\n");
+        modif_indice(indice, 0, 0);
+    }
+    else if (indice[1] == 1)
+    {
+        printf("\nAttention ! La règle suivante n'est pas respectée : \033[0;31mIl ne peut pas y avoir deux lignes/colonnes identiques dans une grille.\033[0m\n");
+        modif_indice(indice, 1, 0);
+    }
+    else if(indice[2] == 1)
+    {
+        printf("Attention ! La règle suivante n'est pas respectée : \033[0;31mDans une ligne/colonne, il doit y avoir autant de 0 que de 1.\033[0m\n");
+        modif_indice(indice, 2, 0);
+    }
+}
+
+void modif_indice(int* indice, int index_indice, int val)
+{
+    indice[index_indice] = val;
 }
 
 int grille_pleine(int** tab_sol, int**tab_game, int taille)

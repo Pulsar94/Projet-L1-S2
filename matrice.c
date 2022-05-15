@@ -66,9 +66,6 @@ int** creation_mat_modele(int taille){
     return adresse;
 }
 
-
-
-
 int** creation_matrice(int taille) {
     /*
      * Fonction: creation_matrice

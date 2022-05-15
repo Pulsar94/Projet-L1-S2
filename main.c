@@ -112,7 +112,7 @@ void grid_menu()
 
             game(grille_jeu, grille_solution, choice);
             sleep(3); // Cooldown : 3 sec le temps qu'il regarde sa grille
-            printf("Retour au menu principal");
+            printf("Retour au ");
             libere_matrice(choice, grille_jeu);
             libere_matrice(choice, grille_solution);
         }

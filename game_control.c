@@ -1,5 +1,7 @@
 #include <stdio.h>
+
 #include "regles_taku.h"
+#include "matrice.h"
 #include "game_control.h"
 
 #define INCORECT 4
@@ -134,7 +136,7 @@ int verif_legal_input(int taille, int x, int y, int val)
   return FALSE;
 }
 
-int input_into_matrice(int** tab_game, int** tab_solu, int x, char y_char, int val, int taille)
+int input_into_matrice(int** tab_game, int** tab_solu, int x, char y_char, int val, int taille, int* indice)
 /*
  * Fonction: input_into_matrice
  * -----------------
@@ -142,11 +144,13 @@ int input_into_matrice(int** tab_game, int** tab_solu, int x, char y_char, int v
  * Convertie la valeur y_char qui est un input de type char en sa position dans l'alphabet par la fonction alpha_to_indice()
  * Condition: Vérifie tout d'abord avec la fonction verif_legal_input() si la valeur est autorisée ou non.
  *
- * **tab: pointeur de tableau
+ * tab_game: pointeur de tableau du jeu
+ * tab_solu: pointeur de tableau sur solution
  * x: position x de val
  * y_char: position y de val (lettre correspondante)
  * val: valeur choisie par l'utilisateur (0 ou 1)
  * taille: taille du tableau
+ * indice: pointeur sur tableau d'indice
  *
  * return: boolean en fonction de condition respectée ou non
  *
@@ -164,7 +168,7 @@ int input_into_matrice(int** tab_game, int** tab_solu, int x, char y_char, int v
       }
       else
       {
-          if (verif_regles_taku(tab_game, x, y, val, taille) == TRUE)
+          if (verif_regles_taku(tab_game, x, y, val, taille, indice) == TRUE)
           {
               return VALIDE;
           }
@@ -190,41 +194,42 @@ void game(int** tab_game, int**tab_solu, int taille)
     int resolved = FALSE, HP = 3;
     char y;
     int x, val;
+    int* indice = indice_init();
     do
     {
         affichage_matrice(tab_game, taille, 1);
         printf("\nSaisir une valeur à injecter sous la forme \nCOLONNE(LETTRE) LIGNE(CHIFFRE) 0/1(VALEUR)\nPour sortir du jeu, entrez Z 0 0\nChoix : ");
         scanf(" %c %d %d", &y, &x, &val);
 
-        int bool_input_matrice = input_into_matrice(tab_game, tab_solu, x, y, val, taille);
+        int bool_input_matrice = input_into_matrice(tab_game, tab_solu, x, y, val, taille, indice);
 
         // VERIF IF INPUT IS LEGAL OR NOT
         if ((bool_input_matrice == FALSE) && (sortie_de_zone_input(y, x, val) == FALSE))
         {
             printf("\nSaisie illégale\n");
         }
+        else {
 
-        // VERIF IF INPUT IS VALID OR NOT
-        if (bool_input_matrice == CORRECT) // COUP CORRECT ?
-        {
-           printf("-+-+-+-+-+COUP CORRECT !-+-+-+-+-+\n");
-        }
-        else
-        {
-            if (bool_input_matrice == INCORECT) // COUP INCORRECT ?
+            // VERIF IF INPUT IS VALID OR NOT
+            if (bool_input_matrice == CORRECT) // COUP CORRECT ?
             {
-                printf("-+-+-+-+-+COUP INCORRECT !-+-+-+-+-+\n Il ne respecte pas les règles du Takuzu !\n");
-                // INDICE
-                printf("\nVous perdez une vie. Points de vie actuel : %d", HP);
-            }
-            else // COUP VALIDE
-            {
-                printf("-+-+-+-+-+COUP VALIDE !-+-+-+-+-+\n Il respecte les règles du Takuzu mais n'est pas la solution.\n");
+                printf("-+-+-+-+-+ COUP CORRECT !-+-+-+-+-+\n");
+            } else {
+                if (bool_input_matrice == INCORECT) // COUP INCORRECT ?
+                {
+                    printf("\033[1;31m-+-+-+-+-+ COUP INCORRECT !-+-+-+-+-+\nIl ne respecte pas les règles du Takuzu !\n\033[0m");
+                    recherche_indice(indice);
+                    printf("\nVous perdez une vie. Points de vie actuel : %d\n", --HP);
+                } else // COUP VALIDE
+                {
+                    printf("-+-+-+-+-+ COUP VALIDE !-+-+-+-+-+\n Il respecte les règles du Takuzu mais n'est pas la solution.\n");
+                }
             }
         }
-        HP = 0;
 
-    } while((resolved == FALSE && HP < 0) || sortie_de_zone_input(y, x, val) == FALSE);
+        // VERIF ENDGAME
+
+    } while(((HP > 0) && (resolved == FALSE)) && sortie_de_zone_input(y, x, val) != TRUE);
     if (sortie_de_zone_input(y, x, val) == TRUE)
     {
         printf("\n-+-+-+-+-+-+-+-+-+\nFIN DU JEU\n-+-+-+-+-+-+-+-+-+\n");
@@ -241,4 +246,7 @@ void game(int** tab_game, int**tab_solu, int taille)
         printf("Grille solution :\n");
         affichage_matrice(tab_solu, taille, 1);
     }
+    supprime_indice(indice);
+    /*libere_matrice(taille, tab_game);
+    libere_matrice(taille, tab_solu);*/
 }
