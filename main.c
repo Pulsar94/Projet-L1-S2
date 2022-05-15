@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
+#include <unistd.h> // sleep function
 #include "matrice.h"
 #include "game_control.h"
 
@@ -95,11 +96,13 @@ void grid_menu()
 
         if (choice == 4 || choice == 8)
         {
-            /*
             int** grille_solution = creation_mat_modele(choice);
             int** grille_jeu = creation_mat_modele(choice);
             game(grille_jeu, choice);
-             */
+            sleep(3); // Cooldown : 3 sec le temps qu'il regarde sa grille
+            printf("Retour au menu principal");
+            libere_matrice(choice, grille_jeu);
+            libere_matrice(choice, grille_solution);
         }
         else
         {
