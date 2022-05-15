@@ -1,11 +1,11 @@
 #ifndef LAB_AFFICHAGE_H
 #define LAB_AFFICHAGE_H
 
-void affichage_matrice(int** tab, int taille, int type_of_matrice);
-int alpha_to_indice(char c, int taille);
-int input_into_matrice(int**tab_game, int** tab_solu, int x, char y_char, int val, int taille, int* indice);
-int verif_legal_input(int taille, int x, int y, int val);
-int sortie_de_zone_input(char y_char, int x, int val);
-void game(int** tab_game, int** tab_solu, int taille);
+void affichage_matrice(int**, int, int);
+int alpha_to_indice(char c, int);
+int input_into_matrice(int**, int**, int, char, int, int, int*);
+int verif_legal_input(int, int, int, int);
+int sortie_de_zone_input(char, int, int);
+void game(int**, int**, int);
 
 #endif
