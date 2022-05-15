@@ -169,3 +169,34 @@ int verification_nb_iden(int taille, int pos_i, int pos_j, int val, int** taku_j
     }
     return TRUE;
 }
+
+int grille_pleine(int** tab_sol, int**tab_game, int taille)
+{
+    int i = 0, j = 0;
+    while(i < taille && i != -1 && j != -1)
+    {
+        while(j < taille && i != -1 && j != -1)
+        {
+            if (tab_game[i][j] == -1)
+            {
+                i = -1; j = -1;
+            }
+            else
+            {
+                j++;
+            }
+        }
+        if (j != -1)
+        {
+            i++;
+        }
+    }
+    if ((i > taille) && (j > taille))
+    {
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
