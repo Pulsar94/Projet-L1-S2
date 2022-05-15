@@ -5,12 +5,18 @@
 #define FALSE 0
 
 int** creation_mat_modele(int taille){
+    int** adresse = NULL;
     if (taille == 4){
         int matrice4[4][4] = {{1,0,0,1},
                               {1,0,1,0},
                               {0,1,1,0},
                               {0,1,0,1}};
-
+        adresse = creation_matrice(taille);
+        for (int i = 0; i < taille; ++i) {
+            for (int j = 0; j < taille; ++j) {
+                adresse[i][j] = matrice4[i][j];
+            }
+        }
     } else{
         if (taille == 8){
             int matrice8[8][8] = {{1,0,1,1,0,1,0,0},
@@ -21,10 +27,40 @@ int** creation_mat_modele(int taille){
                                   {0,1,0,0,1,0,1,1},
                                   {0,0,1,1,0,1,1,0},
                                   {1,1,0,0,1,0,0,1}};
-
+            adresse = creation_matrice(taille);
+            for (int i = 0; i < taille; ++i) {
+                for (int j = 0; j < taille; ++j) {
+                    adresse[i][j] = matrice8[i][j];
+                }
+            }
+        } else{
+            if (taille == 16){
+                int matrice16[16][16] = {{0,0,1,1,0,1,0,1,0,1,1,0,1,0,1,0},
+                                        {1,1,0,0,1,1,0,1,0,0,1,0,1,0,0,1},
+                                        {0,0,1,0,1,0,1,0,1,1,0,1,0,1,1,0},
+                                        {1,1,0,1,0,0,1,1,0,1,0,0,1,0,0,1},
+                                        {1,0,0,1,0,1,0,1,0,0,1,1,0,1,1,0},
+                                        {0,1,1,0,1,1,0,0,1,0,1,0,1,0,1,0},
+                                        {0,0,1,0,1,0,1,1,0,1,0,0,1,1,0,1},
+                                        {1,0,0,1,0,1,1,0,1,1,0,1,0,0,1,0},
+                                        {0,1,0,1,1,0,0,1,0,0,1,0,1,1,0,1},
+                                        {1,0,1,0,0,1,0,0,1,0,1,1,0,1,0,1},
+                                        {0,1,0,1,1,0,1,0,1,1,0,1,0,0,1,0},
+                                        {1,1,0,0,1,0,1,1,0,0,1,0,1,0,0,1},
+                                        {1,0,1,0,0,1,0,0,1,1,0,1,0,1,0,1},
+                                        {0,1,0,1,0,0,1,0,1,1,0,1,0,1,1,0},
+                                        {0,1,1,0,1,0,0,1,0,0,1,0,1,0,1,1},
+                                        {1,0,1,1,0,1,1,0,1,0,0,1,0,1,0,0}};
+                adresse = creation_matrice(taille);
+                for (int i = 0; i < taille; ++i) {
+                    for (int j = 0; j < taille; ++j) {
+                        adresse[i][j] = matrice16[i][j];
+                    }
+                }
+            }
         }
     }
-    // faire un malloc avec remplissage des matrices du dessus pour pouvoir passer l'adresse dans le main
+    return adresse;
 }
 
 
