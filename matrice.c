@@ -40,7 +40,7 @@ int** creation_matrice(int taille) {
      *
      * return: pointeur sur le tableau
      */
-    int** taku_lig = (int**) malloc(taille * sizeof (int));
+    int** taku_lig = (int**) malloc(taille * sizeof (int*));
     for (int i = 0; i < taille; ++i) {
         int* taku_col = (int*) malloc(taille * sizeof(int));
         taku_lig[i] = taku_col;
