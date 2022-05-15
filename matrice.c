@@ -9,6 +9,15 @@
 #define FALSE 0
 
 int** creation_mat_modele(int taille){
+    /*
+     * Fonction: creation_mat_modele
+     * -----------------------------
+     * Génère des grilles de Takuzu en dur
+     *
+     * taille: taille de la grille de Takuzu
+     *
+     * return: pointeur sur la grille
+     */
     int** adresse = NULL;
     if (taille == 4){
         int matrice4[4][4] = {{1,0,0,1},
@@ -98,7 +107,15 @@ void libere_matrice(int taille, int** taku_lig){
 }
 
 int** generation_solution(int taille, int** taku_lig){
-    // Matrice solution du Takuzu
+    /*
+     * Fonction: generation_solution
+     * -----------------------------
+     * Génère des grilles de Takuzu
+     *
+     * taille: taille de la grille
+     *
+     * return: pointeur sur tableau
+     */
     int i, j, val, nbr;
     int* code_binaire = (int*) malloc(taille * sizeof (int));
     int** matrice_sol = (int**) malloc(taille * sizeof (int*));
@@ -200,7 +217,15 @@ int** generation_solution(int taille, int** taku_lig){
 }
 
 int** creer_masque_aleat(int taille) {
-    // Masque qui détermine l'affichage Takuzu utilisateur
+    /*
+     * Fonction: creer_masque_aleat
+     * ----------------------------
+     * Création d'un masque aléatoire
+     *
+     * taille: taille de la grille
+     *
+     * return: pointeur sur masque
+     */
     int** masque = creation_matrice(taille);
     for(int i=0; i<taille; i++)
     {
@@ -213,6 +238,16 @@ int** creer_masque_aleat(int taille) {
 }
 
 int** creer_masque_spe(int taille)
+/*
+ * Fonction: creer_masque_spe
+ * ----------------------------
+ * Création d'un masque manuellement
+ * L'utilisateur saisie les coords
+ *
+ * taille: taille de la grille
+ *
+ * return: pointeur sur masque
+ */
 {
     // Init matrice
     int** masque = creation_matrice(taille);
@@ -269,9 +304,11 @@ int input_into_masque(int**tab, int x, char y_char, int val, int taille)
 }
 
 int** takuzu_utilisateur(int**tab_sol, int** tab_game, int taille, int choice) {
-    // Takuzu visible par l'utilisateur
-    // choice = 1 : masque aleat ; choice = 0 ; masque manuel
-    // mettre -1 pour les cases vides, non visible par l'utilisateur mais pour éviter confusion par la machine
+    /*
+     * Fonction: takuzu_utilisateur
+     * ----------------------------
+     * return: tableau sur tableau masqué
+     */
     int** grille_masque = NULL;
     switch (choice)
     {
