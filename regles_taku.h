@@ -7,7 +7,7 @@
 
 
 int verification_cote (int, int, int, int, int**);
-void verification_lig_col(int, int, int, int**);
+int verification_lig_col(int, int, int, int**);
 int verification_nb_iden(int, int, int, int, int**);
 int grille_pleine(int** tab_sol, int**tab_game, int taille);
 

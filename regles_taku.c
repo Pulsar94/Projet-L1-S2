@@ -119,32 +119,99 @@ int verification_cote (int val, int taille, int pos_i, int pos_j, int** taku_jeu
     return TRUE;
 }
 
-void verification_lig_col(int taille, int pos_i, int pos_j, int** taku_jeu){
-    int cpt =0;
-    int* tab = (int*) malloc(taille * sizeof (int ));
-
-    for (int l = 0; l < taille; ++l) {
-        if (taku_jeu[l][pos_j] == -1){
-            cpt +=1;
-            
+int verification_lig_col(int taille, int pos_i, int pos_j, int** taku_jeu){
+    int cpt = 0, t = 0, i, j, k;
+    int* tab_l = (int*) malloc(taille * sizeof (int ));
+    int* tab_c = (int*) malloc(taille * sizeof (int ));
+    //******************************* LIGNE : *******************************
+    // Vérifie qu'il n'y a que 2 cases vides sur la ligne concernée
+    for (i = 0; i < taille; ++i) {
+        if (taku_jeu[pos_i][i] == -1){
+            cpt++;
         }
     }
-
-
-
-    // Vérifie qu'aucunes lignes ne sont identiques entre-elles
-    for (int i = 0; i < taille; ++i) {
-        for (int j = 0; j < taille; ++j) {
-            if ((taku_jeu[i][j] == 0) || (taku_jeu[i][j] == 1)){
-                cpt += 1;
+    if (cpt == taille-3){
+        // Vérifie qu'il n'y a que 2 cases vides sur la ligne concernée
+        // Puis vérifie qu'aucunes lignes ne sont identiques entre-elles
+        cpt = 0;
+        for (i = 0; i < taille; ++i) {
+            for (j = 0; j < taille; ++j) {
+                // verifie que les lignes sont pleines
+                if ((taku_jeu[i][j] == 0) || (taku_jeu[i][j] == 1)){
+                    cpt++;
+                }
+                if (cpt == taille-1){
+                    // indexe le numéro des lignes pleines dans le tableau
+                    tab_l[t] = i;
+                    t++;
+                }
+            }
+            cpt = 0;
+        }
+        for (i = t; i < taille; ++i) {
+            // Sécurise la non-utilisation des autres cases pour ne pas qu'une valeur au hasard aie la même valeur qu'un numéro de ligne
+            tab_l[i] = -1;
+        }
+        for (i = 0; i < taille; ++i) {
+            if (tab_l[i] == -1){
+                break;
+            }
+            for (k = 0; k < taille; ++k) {
+                if (taku_jeu[tab_l[i]][k] == taku_jeu[pos_i][k]){
+                    cpt++;
+                }
+            }
+            if (cpt == taille-3){
+                return FALSE;
             }
         }
-        if (cpt == taille-1){
-            tab[i] = i;
+    }
+    // ******************************* COLONNE : *******************************
+    // Vérifie qu'aucunes colonnes ne sont identiques entre-elles
+    cpt = 0;
+    t = 0;
+    for (i = 0; i < taille; ++i) {
+        if (taku_jeu[i][pos_j] == -1){
+            cpt++;
         }
     }
-
-    // Vérifie qu'aucunes lignes ne sont identiques entre-elles
+    if (cpt == taille-3){
+        // Vérifie qu'il n'y a que 2 cases vides sur la colonne concernée
+        // Puis vérifie qu'aucunes colonnes ne sont identiques entre-elles
+        cpt = 0;
+        for (i = 0; i < taille; ++i) {
+            for (j = 0; j < taille; ++j) {
+                // verifie que les colonnes sont pleines
+                if ((taku_jeu[j][i] == 0) || (taku_jeu[j][i] == 1)){
+                    cpt++;
+                }
+                if (cpt == taille-1){
+                    // indexe le numéro des lignes pleines dans le tableau
+                    tab_l[t] = i;
+                    t++;
+                }
+            }
+            cpt = 0;
+        }
+        for (i = t; i < taille; ++i) {
+            // Sécurise la non-utilisation des autres cases (à partir de la dernière valeur) pour ne pas qu'une valeur au hasard aie la même valeur qu'un numéro de ligne
+            tab_l[i] = -1;
+        }
+        for (i = 0; i < taille; ++i) {
+            if (tab_l[i] == -1){
+                break;
+            }
+            for (k = 0; k < taille; ++k) {
+                if (taku_jeu[k][tab_l[i]] == taku_jeu[k][pos_j]){
+                    cpt++;
+                }
+            }
+            if (cpt == taille-3){
+                return FALSE;
+            }
+        }
+    }
+    return TRUE;
 }
 
 int verification_nb_iden(int taille, int pos_i, int pos_j, int val, int** taku_jeu){
