@@ -97,7 +97,7 @@ void libere_matrice(int taille, int** taku_lig){
     free(taku_lig);
 }
 
-void generation_solution(int taille, int** taku_lig){
+int** generation_solution(int taille, int** taku_lig){
     // Matrice solution du Takuzu
     int i, j, val, nbr;
     int* code_binaire = (int*) malloc(taille * sizeof (int));
@@ -196,6 +196,7 @@ void generation_solution(int taille, int** taku_lig){
             }
             break;
     }
+    return matrice_sol;
 }
 
 int** creer_masque_aleat(int taille) {
