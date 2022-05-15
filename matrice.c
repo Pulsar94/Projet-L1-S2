@@ -99,19 +99,55 @@ void libere_matrice(int taille, int** taku_lig){
 
 void generation_solution(int taille, int** taku_lig){
     // Matrice solution du Takuzu
-    int i, j, val;
+    int i, j, val, nbr;
+    /*
     for (i = 0; i < taille; ++i) {
         for (j = 0; j < taille; ++j) {
             taku_lig[i][j] = rand() % 2;
             val = taku_lig[i][j];
             if (verification_cote(val, taille, i, j, taku_lig) == FALSE || verification_lig_col(taille, i, j, taku_lig) == FALSE ||
                     verification_nb_iden(taille, i, j, val, taku_lig) == FALSE) {
-                
+
 
                 // remplir un tableau ligne et vérifie les règles et intègre dans la matrice
                 // vérifier les autres règles après
             }
         }
+    }
+     */
+    int* code_binaire = (int*) malloc(taille * sizeof (int));
+    switch (taille) {
+        case 4:
+            nbr = rand() % 16;
+            for (i = 0; i < taille; ++i) {
+                // conversion en binaire dans le tableau
+                for(j = 0; nbr > 0; j++)
+                {
+                    code_binaire[j] = nbr % 2;
+                    nbr = nbr/2;
+                }
+
+            }
+
+            break;
+
+        case 8:
+            nbr = rand() % 256;
+            for(i=0; nbr > 0; i++)
+            {
+                code_binaire[i] = nbr % 2;
+                nbr = nbr/2;
+            }
+            break;
+
+        case 16:
+            nbr = rand() % 65536;
+            for(i=0; nbr > 0; i++)
+            {
+                code_binaire[i] = nbr % 2;
+                nbr = nbr/2;
+            }
+            break;
     }
 }
 
