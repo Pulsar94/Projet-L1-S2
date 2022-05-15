@@ -119,11 +119,32 @@ int verification_cote (int val, int taille, int pos_i, int pos_j, int** taku_jeu
     return TRUE;
 }
 
-void verification_lig_col(int taille, int** taku_jeu){
-    // Vérifie aucunes lignes et colonnes sont identiques
-    for (int i = 0; i < taille; ++i) {
-        
+void verification_lig_col(int taille, int pos_i, int pos_j, int** taku_jeu){
+    int cpt =0;
+    int* tab = (int*) malloc(taille * sizeof (int ));
+
+    for (int l = 0; l < taille; ++l) {
+        if (taku_jeu[l][pos_j] == -1){
+            cpt +=1;
+            
+        }
     }
+
+
+
+    // Vérifie qu'aucunes lignes ne sont identiques entre-elles
+    for (int i = 0; i < taille; ++i) {
+        for (int j = 0; j < taille; ++j) {
+            if ((taku_jeu[i][j] == 0) || (taku_jeu[i][j] == 1)){
+                cpt += 1;
+            }
+        }
+        if (cpt == taille-1){
+            tab[i] = i;
+        }
+    }
+
+    // Vérifie qu'aucunes lignes ne sont identiques entre-elles
 }
 
 int verification_nb_iden(int taille, int pos_i, int pos_j, int val, int** taku_jeu){

@@ -7,7 +7,7 @@
 
 
 int verification_cote (int, int, int, int, int**);
-void verification_lig_col(int, int**);
+void verification_lig_col(int, int, int, int**);
 int verification_nb_iden(int, int, int, int, int**);
 
 
