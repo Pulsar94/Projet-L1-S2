@@ -360,3 +360,80 @@ int verification_ligne_sol(int* tab_sol, int taille){
     }
     return TRUE;
 }
+
+int verification_colonne_sol(int** tab_sol, int taille) {
+    int cpt = 0, i, temp = -2;
+    for (i = 0; i < taille; ++i) {
+        for (int j = 0; j < taille; ++j) {
+            if (tab_sol[j][i] == temp) {
+                cpt++;
+                if (cpt == 2){
+                    return FALSE;
+                }
+
+            } else {
+                cpt = 0;
+            }
+            temp = tab_sol[j][i];
+        }
+    }
+    return TRUE;
+}
+
+int verification_nombre_sol_col(int taille, int** taku_sol){
+    // Vérifie s'il y a le même nombre de 0 et de 1 dans la ligne ou la colonne dans la matrice générée automatiquement
+    int cpt = 0;
+    // *********************** COLONNE ***********************
+    for (int i = 0; i < taille; ++i) {
+        for (int j = 0; j < taille; ++j) {
+            if (0 == taku_sol[i][j]){
+                cpt += 1;
+            }
+            if (cpt >= (taille/2)){
+                return FALSE;
+            }
+        }
+        cpt = 0;
+    }
+    for (int i = 0; i < taille; ++i) {
+        for (int j = 0; j < taille; ++j) {
+            if (1 == taku_sol[i][j]){
+                cpt += 1;
+            }
+            if (cpt >= (taille/2)){
+                return FALSE;
+            }
+        }
+        cpt = 0;
+    }
+    return TRUE;
+}
+
+int verification_nombre_sol_lig(int taille, int* taku_sol){
+    // Vérifie s'il y a le même nombre de 0 et de 1 dans la ligne ou la colonne dans la matrice générée automatiquement
+    int cpt = 0;
+    // *********************** LIGNE ***********************
+    for (int i = 0; i < taille; ++i) {
+        for (int j = 0; j < taille; ++j) {
+            if (0 == taku_sol[j][i]){
+                cpt += 1;
+            }
+            if (cpt >= (taille/2)){
+                return FALSE;
+            }
+        }
+        cpt = 0;
+    }
+    for (int i = 0; i < taille; ++i) {
+        for (int j = 0; j < taille; ++j) {
+            if (1 == taku_sol[j][i]){
+                cpt += 1;
+            }
+            if (cpt >= (taille/2)){
+                return FALSE;
+            }
+        }
+        cpt = 0;
+    }
+    return TRUE;
+}
