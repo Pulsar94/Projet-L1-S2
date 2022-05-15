@@ -292,17 +292,22 @@ void recherche_indice(int* indice)
     if (indice[0] == 1)
     {
         printf("\nAttention ! La règle suivante n'est pas respectée : \033[0;31mDans une ligne ou une colonne, il ne peut y avoir plus de deux 0 ou deux 1 à la suite (on ne peut pas avoir\n"
-               "trois 0 de suite ou trois 1 de suite).\033[0m\n");
+               "trois 0 de suite ou trois 1 de suite)."
+               "\n\033[0;32mAu-dessus, en dessous, à gauche, à droite d’une série de deux 0,il ne peut y avoir qu’un 1."
+               "\n\033[0;32mAu-dessus, en dessous, à gauche, à droite d’une série de deux 1,il ne peut y avoir qu’un 0.\n\033[0m");
         modif_indice(indice, 0, 0);
     }
     else if (indice[1] == 1)
     {
-        printf("\nAttention ! La règle suivante n'est pas respectée : \033[0;31mIl ne peut pas y avoir deux lignes/colonnes identiques dans une grille.\033[0m\n");
+        printf("\nAttention ! La règle suivante n'est pas respectée : \033[0;31mIl ne peut pas y avoir deux lignes/colonnes identiques dans une grille."
+               "\n\033[0;32mEn comparant une ligne (ou une colonne) déjà̀ remplie avec une ligne (ou une colonne) à laquelle il manque 2 valeurs, si toutes les valeurs correspondent, alors on peut remplir la ligne (ou la colonne) à laquelle il manque deux valeurs.\n\033[0m");
         modif_indice(indice, 1, 0);
     }
     else if(indice[2] == 1)
     {
-        printf("Attention ! La règle suivante n'est pas respectée : \033[0;31mDans une ligne/colonne, il doit y avoir autant de 0 que de 1.\033[0m\n");
+        printf("Attention ! La règle suivante n'est pas respectée : \033[0;31mDans une ligne/colonne, il doit y avoir autant de 0 que de 1."
+               "\n\033[0;32mEntre deux 0, il ne peut y avoir qu’un 1."
+               "\n\033[0;32mEntre deux 1, il ne peut y avoir qu’un 0.\033[0m\n");
         modif_indice(indice, 2, 0);
     }
 }
