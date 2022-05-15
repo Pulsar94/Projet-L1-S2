@@ -15,4 +15,6 @@ int* indice_init();
 void supprime_indice(int* indice);
 void recherche_indice(int* indice, int player);
 void modif_indice(int* indice, int index_indice, int val);
+int verification_ligne_sol(int*, int);
+
 #endif //PROJET_L1_S2_REGLES_TAKU_H
