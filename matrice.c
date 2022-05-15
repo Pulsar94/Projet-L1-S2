@@ -110,7 +110,11 @@ void generation_solution(int taille, int** taku_lig){
     }
 }
 
-void creer_masque() {
+void creer_masque_aleat() {
+    // Masque qui détermine l'affichage Takuzu utilisateur
+}
+
+void creer_masque_spe() {
     // Masque qui détermine l'affichage Takuzu utilisateur
 }
 
