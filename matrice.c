@@ -3,6 +3,7 @@
 
 #include "matrice.h"
 #include "game_control.h"
+#include "regles_taku.h"
 
 #define TRUE 1
 #define FALSE 0
@@ -98,11 +99,15 @@ void libere_matrice(int taille, int** taku_lig){
 
 void generation_solution(int taille, int** taku_lig){
     // Matrice solution du Takuzu
-    for (int i = 0; i < taille; ++i) {
-        for (int j = 0; j < taille; ++j) {
+    int i, j, val;
+    for (i = 0; i < taille; ++i) {
+        for (j = 0; j < taille; ++j) {
             taku_lig[i][j] = rand() % 2;
-            if (NULL) {
-                // besoin de coder les conditions avant de remplir la matrice
+            val = taku_lig[i][j];
+            if (verification_cote(val, taille, i, j, taku_lig) == FALSE || verification_lig_col(taille, i, j, taku_lig) == FALSE ||
+                    verification_nb_iden(taille, i, j, val, taku_lig) == FALSE) {
+                
+
                 // remplir un tableau ligne et vérifie les règles et intègre dans la matrice
                 // vérifier les autres règles après
             }
