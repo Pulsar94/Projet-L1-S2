@@ -75,7 +75,7 @@ void main_menu()
             }
             case 2:
             {
-                // 2
+                autoresolve_menu();
                 break;
             }
             case 3:
