@@ -131,3 +131,53 @@ int input_into_matrice(int**tab, int x, char y_char, int val, int taille)
   }
   return FALSE;
 }
+
+void game(int** tab, int taille)
+{
+    int resolved = FALSE, HP = 3;
+    do
+    {
+        char y;
+        int x, val, i = 0;
+        affichage_matrice(tab, taille);
+        printf("\nSaisir une valeur à injecter sous la forme \nCOLONNE(LETTRE) LIGNE(CHIFFRE) 0/1(VALEUR) : ");
+        scanf(" %c %d %d", &y, &x, &val);
+
+        // VERIF IF INPUT IS LEGAL OR NOT
+        if ((input_into_matrice(tab, x, y, val, taille)) == FALSE)
+        {
+            printf("\nSaisie illégale\n");
+        }
+
+        /*// VERIF IF INPUT IS VALID OR NOT
+        if (( == TRUE)) // COUP CORRECT ?
+        {
+            printf("-+-+-+-+-+COUP CORRECT !-+-+-+-+-+");
+        }
+        else
+        {
+            if ( == FALSE) // COUP INCORRECT ?
+            {
+                printf("-+-+-+-+-+COUP INCORRECT !-+-+-+-+-+\n Il ne respecte pas les règles du Takuzu !");
+                // INDICE
+                printf("\nVous perdez une vie. Points de vie actuel : %d", HP);
+            }
+            else // COUP CORRECT
+            {
+                printf("-+-+-+-+-+COUP VALIDE !-+-+-+-+-+\n Il respecte les règles du Takuzu mais n'est pas la solution.");
+            }
+        }*/
+        HP = 0;
+
+    } while(resolved == FALSE && HP < 0);
+    if (HP == 0)
+    {
+        printf("\nGAME LOST\n");
+    }
+    else if (resolved == TRUE)
+    {
+        printf("\nGAME WIN");
+    }
+    printf("Grille finale :\n");
+    affichage_matrice(tab, taille);
+}

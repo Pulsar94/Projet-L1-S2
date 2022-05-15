@@ -54,7 +54,7 @@ void main_menu()
 {
     int choice = -1;
     do {
-        printf("Bienvenue dans le jeux du Takuzu. Choisissez votre menu : \n"
+        printf("Menu principal. Choisissez votre menu : \n"
                "1 - Résoudre une grille.\n"
                "2 - Résoudre automatiquement une grille de Takuzu.\n"
                "3 - Génère une grille de Takuzu.\n"
@@ -79,7 +79,6 @@ void main_menu()
             }
             case 4:
             {
-                printf("Sortie du menu...");
                 break;
             }
             default: printf("Choix non valide. SVP essayez a nouveau.\n");
@@ -93,20 +92,18 @@ void grid_menu()
     do {
         printf("Quelle taille de grille souhaitez-vous ?\nTailles disponible : 4, 8\nChoix : ");
         scanf("%d", &choice);
-        switch (choice) {
-            case 4: {
-                printf("Voici les grilles disponibles : ");
-                // à implementer
-                break;
-            }
-            case 8: {
-                printf("Voici les grilles disponibles : ");
-                // à implementer
-                break;
-            }
-            default:
-                printf("Choix de la taille invalide. Veuillez réessayer.\n");
 
+        if (choice == 4 || choice == 8)
+        {
+            /*
+            int** grille_solution = creation_mat_modele(choice);
+            int** grille_jeu = creation_mat_modele(choice);
+            game(grille_jeu, choice);
+             */
+        }
+        else
+        {
+            printf("Taille indisponible ou non reconnue. Veuillez réessayer.\n");
         }
     } while (!(choice == 4 || choice == 8));
     //printf("\n-+-+-+-+-+-+-+-+-+\nSortie du grid_menu().\n-+-+-+-+-+-+-+-+-+\n");
