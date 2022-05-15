@@ -8,7 +8,7 @@
 #define TRUE 1
 #define FALSE 0
 
-int verification_cote (int val, int taille, int pos_i, int pos_j, int** taku_lig) {
+int verification_cote (int val, int taille, int pos_i, int pos_j, int** taku_jeu) {
     // Regarde si la règle de pas plus de 2 chiffes identiques côte à côte est respectée
     // première boucle i = 4 pour vérification sur les quatre directions (haut,bas,droite,gauche)
     int j, temp = 0, cpt = 0;
@@ -21,11 +21,11 @@ int verification_cote (int val, int taille, int pos_i, int pos_j, int** taku_lig
                     if (cpt > 2){
                         break;
                     }
-                    if (taku_lig[j][pos_j] != val){
+                    if (taku_jeu[j][pos_j] != val){
                         break;
                     }
                     else {
-                        if (taku_lig[j][pos_j] == val){
+                        if (taku_jeu[j][pos_j] == val){
                             temp += 1;
                         }
                     }
@@ -46,11 +46,11 @@ int verification_cote (int val, int taille, int pos_i, int pos_j, int** taku_lig
                     if (cpt > 2){
                         break;
                     }
-                    if (taku_lig[j][pos_j] != val){
+                    if (taku_jeu[j][pos_j] != val){
                         break;
                     }
                     else {
-                        if (taku_lig[j][pos_j] == val){
+                        if (taku_jeu[j][pos_j] == val){
                             temp += 1;
                         }
                     }
@@ -72,11 +72,11 @@ int verification_cote (int val, int taille, int pos_i, int pos_j, int** taku_lig
                     if (cpt > 2){
                         break;
                     }
-                    if (taku_lig[pos_i][j] != val){
+                    if (taku_jeu[pos_i][j] != val){
                         break;
                     }
                     else {
-                        if (taku_lig[pos_i][j] == val){
+                        if (taku_jeu[pos_i][j] == val){
                             temp += 1;
                         }
                     }
@@ -97,11 +97,11 @@ int verification_cote (int val, int taille, int pos_i, int pos_j, int** taku_lig
                     if (cpt > 2){
                         break;
                     }
-                    if (taku_lig[pos_i][j] != val){
+                    if (taku_jeu[pos_i][j] != val){
                         break;
                     }
                     else {
-                        if (taku_lig[pos_i][j] == val){
+                        if (taku_jeu[pos_i][j] == val){
                             temp += 1;
                         }
                     }
@@ -119,25 +119,32 @@ int verification_cote (int val, int taille, int pos_i, int pos_j, int** taku_lig
     return TRUE;
 }
 
-void verification_lig_col(){
+void verification_lig_col(int taille, int** taku_jeu){
     // Vérifie aucunes lignes et colonnes sont identiques
-
+    for (int i = 0; i < taille; ++i) {
+        
+    }
 }
 
-void verification_nb_iden(int taille, int pos_i, int pos_j, int val, int** taku_lig){
+int verification_nb_iden(int taille, int pos_i, int pos_j, int val, int** taku_jeu){
     // Vérifie s'il y a le même nombre de 0 et de 1 dans la ligne ou la colonne
     int cpt = 0;
     for (int i = 0; i < taille; ++i) {
-        if (val == taku_lig[i][pos_j]){
+        if (val == taku_jeu[i][pos_j]){
             cpt += 1;
         }
-        // voire si faire un break quand cpt > taille/2
+        if (cpt > (taille/2)){
+            return FALSE;
+        }
     }
-    // reinitialiser cpt à 0
+    cpt = 0;
     for (int j = 0; j < taille; ++j) {
-        if (val == taku_lig[pos_i][j]){
+        if (val == taku_jeu[pos_i][j]){
             cpt += 1;
         }
-        // voire si faire un break quand cpt > taille/2
+        if (cpt > (taille/2)){
+            return FALSE;
+        }
     }
+    return TRUE;
 }
