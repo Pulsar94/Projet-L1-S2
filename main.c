@@ -1,7 +1,9 @@
 #include <stdio.h>
-#include <time.h>
 #include <stdlib.h>
 #include <unistd.h> // sleep function
+#include <time.h>
+#include <curses.h>
+
 #include "matrice.h"
 #include "game_control.h"
 
@@ -43,25 +45,26 @@ int main() {
 
 void welcome()
 {
-    printf("░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n"
-           "████████╗ ░█████╗░ ██╗░░██╗ ██╗░░░██╗ ███████╗ ██╗░░░██╗\n"
-           "╚══██╔══╝ ██╔══██╗ ██║░██╔╝ ██║░░░██║ ╚════██║ ██║░░░██║\n"
-           "░░░██║░░░ ███████║ █████═╝░ ██║░░░██║ ░░███╔═╝ ██║░░░██║\n"
-           "░░░██║░░░ ██╔══██║ ██╔═██╗░ ██║░░░██║ ██╔══╝░░ ██║░░░██║\n"
-           "░░░██║░░░ ██║░░██║ ██║░╚██╗ ╚██████╔╝ ███████╗ ╚██████╔╝\n"
-           "░░░╚═╝░░░ ╚═╝░░╚═╝ ╚═╝░░╚═╝ ░╚═════╝░ ╚══════╝ ░╚═════╝░\n"
-           "░░░░░░░░░░░░░░░░░░░░░░░░░Marque déposée le 31/01/2006░░░\n");
+    printf("\033[0;34m░░░░░░░░░░░░░░░░░░\033[0m░░░░░░░░░░░░░░░░░░░\033[0;31m░░░░░░░░░░░░░░░░░░░\n"
+           "\033[0;34m████████╗ ░█████╗░\033[0m ██╗░░██╗ ██╗░░░██╗\033[0;31m ███████╗ ██╗░░░██╗\n"
+           "\033[0;34m╚══██╔══╝ ██╔══██╗\033[0m ██║░██╔╝ ██║░░░██║\033[0;31m ╚════██║ ██║░░░██║\n"
+           "\033[0;34m░░░██║░░░ ███████║\033[0m █████═╝░ ██║░░░██║\033[0;31m ░░███╔═╝ ██║░░░██║\n"
+           "\033[0;34m░░░██║░░░ ██╔══██║\033[0m ██╔═██╗░ ██║░░░██║\033[0;31m ██╔══╝░░ ██║░░░██║\n"
+           "\033[0;34m░░░██║░░░ ██║░░██║\033[0m ██║░╚██╗ ╚██████╔╝\033[0;31m ███████╗ ╚██████╔╝\n"
+           "\033[0;34m░░░╚═╝░░░ ╚═╝░░╚═╝\033[0m ╚═╝░░╚═╝ ░╚═════╝░\033[0;31m ╚══════╝ ░╚═════╝░\n"
+           "\033[0;34m░░░░░░░░░░░░░░░░░░\033[0m░░░░░░░Marque dépos\033[0;31mée le 31/01/2006░░░\n");
+    printf("\033[0m");
 }
 void main_menu()
 {
     int choice = -1;
     do {
-        printf("Menu principal. Choisissez votre menu : \n"
+        printf("\033[1mMenu principal. \033[2;34mChoisissez votre menu : \033[0m\n"
                "1 - Résoudre une grille.\n"
                "2 - Résoudre automatiquement une grille de Takuzu.\n"
                "3 - Génère une grille de Takuzu.\n"
                "4 - Quitter le programme.\n"
-               "Choix : ");
+               "\033[0;34mChoix : \033[0m");
         scanf("%d", &choice);
         switch (choice) {
             case 1:
@@ -92,7 +95,7 @@ void grid_menu()
 {
     int choice = -1;
     do {
-        printf("Quelle taille de grille souhaitez-vous ?\nTailles disponible : 4, 8\nChoix : ");
+        printf("\033[0;34mQuelle taille de grille souhaitez-vous ?\n\033[0mTailles disponible : \033[0;32m4\033[0m, \033[0;33m8, \033[0;31m16 \033[0m(Choisissez \033[0;36m0\033[0m pour revenir au menu principale)\n\033[0;34mChoix :\033[0m ");
         scanf("%d", &choice);
 
         if (choice == 4 || choice == 8)
@@ -114,11 +117,19 @@ void grid_menu()
             libere_matrice(choice, grille_jeu);
             libere_matrice(choice, grille_solution);
         }
-        else
-        {
-            printf("Taille indisponible ou non reconnue. Veuillez réessayer.\n");
+        else {
+            if (choice == 16) {
+                printf("\n\033[0;31m*Zone pas encore terminée*\n");
+            } else {
+                if (choice == 0) {
+                    printf("Sortie en cours...\n");
+                } else {
+                    printf("Taille indisponible ou non reconnue. Veuillez réessayer.\n");
+                }
+            }
         }
-    } while (!(choice == 4 || choice == 8));
+
+    } while (!(choice == 4 || choice == 8 || choice == 0));
     //printf("\n-+-+-+-+-+-+-+-+-+\nSortie du grid_menu().\n-+-+-+-+-+-+-+-+-+\n");
 }
 
@@ -128,10 +139,10 @@ int masque_menu()
 
     do
     {
-        printf("Veuillez choisir un type de masque.\n"
+        printf("\033[0;34mVeuillez choisir un type de masque.\033[0m\n"
                "1. Masque manuellement saisie.\n"
                "2. Masque aléatoire.\n"
-               "Choix : \n");
+               "\033[0;34mChoix :\033[0m \n");
         scanf("%d", &choice_masque);
 
         if (!(choice_masque == 1 || choice_masque == 2))
