@@ -206,18 +206,20 @@ void game(int** tab_game, int**tab_solu, int taille)
         HP = 0;
 
     } while((resolved == FALSE && HP < 0) || sortie_de_zone_input(y, x, val) == FALSE);
-    if (HP == 0)
-    {
-        printf("\n-+-+-+-+-+-+-+-+-+\nGAME LOST\n-+-+-+-+-+-+-+-+-+\n");
-    }
-    else if (sortie_de_zone_input(y, x, val) == TRUE)
+    if (sortie_de_zone_input(y, x, val) == TRUE)
     {
         printf("\n-+-+-+-+-+-+-+-+-+\nFIN DU JEU\n-+-+-+-+-+-+-+-+-+\n");
+    }
+    else if (HP == 0)
+    {
+        printf("\n-+-+-+-+-+-+-+-+-+\nGAME LOST\n-+-+-+-+-+-+-+-+-+\n");
+        printf("Grille solution :\n");
+        affichage_matrice(tab_solu, taille, 1);
     }
     else if (resolved == TRUE)
     {
         printf("\n-+-+-+-+-+-+-+-+-+\nGAME WIN\n-+-+-+-+-+-+-+-+-+\n");
+        printf("Grille solution :\n");
+        affichage_matrice(tab_solu, taille, 1);
     }
-    printf("Grille finale :\n");
-    affichage_matrice(tab_solu, taille, 1);
 }
