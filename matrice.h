@@ -6,7 +6,7 @@ int** creation_mat_modele(int);
 int** creation_matrice(int);
 void libere_matrice(int, int**);
 int verification_cote(int, int, int, int, int**);
-int** generation_solution(int, int**);
+int** generation_solution(int);
 int** creer_masque_aleat(int);
 int** creer_masque_spe(int);
 int input_into_masque(int**tab, int x, char y_char, int val, int taille);

@@ -30,7 +30,6 @@ void auto_resolve(int** tab_game, int** tab_solution, int taille, int player)
     for(int j = 0; j<taille ; j++)
     {
         for(int i = 1; i<taille + 1; i++) {
-            printf("\033[1;31mI : %d J : %d\033[0m", j, i-1);
             h = 0;
             bool_input_matrice = FALSE;
             affichage_matrice(tab_game, taille, 1);
