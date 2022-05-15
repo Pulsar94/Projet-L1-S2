@@ -17,7 +17,15 @@
 
 
 
-void auto_resolve(int** tab_game, int** tab_solution, int taille, int player)
+void auto_resolve(int** tab_game, int** tab_solution, int taille)
+/*
+ * Fonction : auto_resolve
+ * -----------------------
+ * Permet la résolution automatique de la grille
+ * tab_game: tableau jeu
+ * tab_solution: tableau solution
+ * taille: taille du tableau
+ */
 {
     char alpha_maj[16] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P'};
 

@@ -181,6 +181,17 @@ int input_into_matrice(int** tab_game, int** tab_solu, int x, char y_char, int v
   return FALSE;
 }
 int sortie_de_zone_input(char y_char, int x, int val)
+/*
+ * Fonction: sortie_de_zone_input
+ * ------------------------------
+ * Permet de sortir de la zone de saisie lors de situation grilles/masques
+ *
+ * y_char: caractère
+ * x: entier
+ * val: entier
+ *
+ * return: bool
+ */
 {
     if ((y_char == 'z' || y_char == 'Z') && x == 0 && val == 0)
     {
@@ -190,6 +201,20 @@ int sortie_de_zone_input(char y_char, int x, int val)
 }
 //
 void game(int** tab_game, int**tab_solu, int taille)
+/*
+ * Fonction: game
+ * ---------------
+ * Fonction opérant sur le jeu.
+ * Indique si le coup est valide, correct ou incorrect.
+ * L'utilisateur à 3 vies.
+ * La grille de solution est présentée si le joueur joue jusqu'à la fin.
+ * Tout en donnant des indices et rappels de quels règles non respectés.
+ *
+ * tab_game: grille_jeu
+ * tab_solu: grille de solution
+ * taille: taille de la grille
+ *
+ */
 {
     int resolved = FALSE;
     char y;

@@ -161,7 +161,7 @@ void auto_joue_menu()
             affichage_matrice(grille_masque, choix, 2);
             printf("\n-+-+-+-+-+-+-+-^^ MASQUE ^^-+-+-+-+-+-+-+-+-\n");
 
-            auto_resolve(grille_jeu, grille_solution, choix, TRUE);
+            auto_resolve(grille_jeu, grille_solution, choix);
 
             printf("Retour au ");
             libere_matrice(choix, grille_jeu);
@@ -187,7 +187,7 @@ void auto_genere_menu()
 
         if (choix == 4 || choix == 8)
         {
-            int** grille_solution = generation_solution(choix);
+            int** grille_solution = generation_solution(choix, NULL);
             //int** grille_jeu = generation_solution(choix);
 
             affichage_matrice(grille_solution, choix, 1);
