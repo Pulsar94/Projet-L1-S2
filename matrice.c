@@ -101,19 +101,23 @@ void generation_solution(int taille, int** taku_lig){
     // Matrice solution du Takuzu
     int i, j, val, nbr;
     int* code_binaire = (int*) malloc(taille * sizeof (int));
+    int** matrice_sol = (int**) malloc(taille * sizeof (int*));
     switch (taille) {
         case 4:
-            do {
-                nbr = rand() % 16;
-                for (i = 0; i < taille; ++i) {
-                    // conversion en binaire dans le tableau
-                    for(j = 0; nbr > 0; j++)
-                    {
-                        code_binaire[j] = nbr % 2;
-                        nbr = nbr/2;
+            for (int k = 0; k < taille; ++k) {
+                do {
+                    nbr = rand() % 16;
+                    for (i = 0; i < taille; ++i) {
+                        // conversion en binaire dans le tableau
+                        for(j = 0; nbr > 0; j++)
+                        {
+                            code_binaire[j] = nbr % 2;
+                            nbr = nbr/2;
+                        }
                     }
-                }
-            } while (NULL);
+                } while (verification_ligne_sol(code_binaire, taille) == FALSE);
+                matrice_sol[k] = code_binaire;
+            }
             break;
 
         case 8:
