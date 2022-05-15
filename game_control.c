@@ -7,7 +7,7 @@
 char alpha_maj[16] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P'};
 char alpha_min[16] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p'};
 
-void affichage_matrice(int** tab, int taille)
+void affichage_matrice(int** tab, int taille, int type_of_matrice)
 /*
  * Fonction: affichage_matrice
  * -----------------
@@ -15,43 +15,69 @@ void affichage_matrice(int** tab, int taille)
  * 
  * tab: pointeur sur tableau
  * taille: taille du tableau
+ * type_of_matrice:
+ *      if 1: matrice de type jeu/solution
+ *      if 2: matrice de type masque
  *
  */
 {
-  for(int i=0; i<taille; i++)
-  {
-    printf("\t%c", alpha_maj[i]);
-  }
-  printf("\n");
+    switch (type_of_matrice) {
+        case 1: {
+            for (int i = 0; i < taille; i++) {
+                printf("\t%c", alpha_maj[i]);
+            }
+            printf("\n");
 
-  for(int i=0; i<taille; i++)
-  {
-    printf("  ");
-    for(int j=0; j<taille; j++)
-    {
-      printf("+---");
-    }
-    printf("+\n");
-    printf("%d ", i + 1);
-    for(int j=0; j<taille; j++)
-    {
-      if(tab[i][j] == -1)
-      {
-        printf("|   ");
-      }
-      else
-      {
-      printf("| %d ", tab[i][j]);  
-      }
-    }
-    printf("|\n");
-  }
-  printf("  ");
-  for(int j=0; j<taille; j++)
-  {
-    printf("+---");
-  }
-  printf("+\n");
+            for (int i = 0; i < taille; i++) {
+                printf("  ");
+                for (int j = 0; j < taille; j++) {
+                    printf("+---");
+                }
+                printf("+\n");
+                printf("%d ", i + 1);
+                for (int j = 0; j < taille; j++) {
+                    if (tab[i][j] == -1) {
+                        printf("|   ");
+                    } else {
+                        printf("| %d ", tab[i][j]);
+                    }
+                }
+                printf("|\n");
+            }
+            printf("  ");
+            for (int j = 0; j < taille; j++) {
+                printf("+---");
+            }
+            printf("+\n");
+            break;
+        }
+        case 2:
+        {
+            for (int i = 0; i < taille; i++) {
+                printf("\t%c", alpha_maj[i]);
+            }
+            printf("\n");
+
+            for (int i = 0; i < taille; i++) {
+                printf("  ");
+                for (int j = 0; j < taille; j++) {
+                    printf("+---");
+                }
+                printf("+\n");
+                printf("%d ", i + 1);
+                for (int j = 0; j < taille; j++) {
+                        printf("| %d ", tab[i][j]);
+                    }
+                printf("|\n");
+                }
+            }
+            printf("  ");
+            for (int j = 0; j < taille; j++) {
+                printf("+---");
+            }
+            printf("+\n");
+            break;
+        }
 }
 
 int alpha_to_indice(char c, int taille)
@@ -134,19 +160,19 @@ int input_into_matrice(int**tab, int x, char y_char, int val, int taille)
   return FALSE;
 }
 
-void game(int** tab, int taille)
+void game(int** tab_game, int**tab_solu, int taille)
 {
     int resolved = FALSE, HP = 3;
     do
     {
         char y;
         int x, val, i = 0;
-        affichage_matrice(tab, taille);
+        affichage_matrice(tab_game, taille, 1);
         printf("\nSaisir une valeur à injecter sous la forme \nCOLONNE(LETTRE) LIGNE(CHIFFRE) 0/1(VALEUR) : ");
         scanf(" %c %d %d", &y, &x, &val);
 
         // VERIF IF INPUT IS LEGAL OR NOT
-        if ((input_into_matrice(tab, x, y, val, taille)) == FALSE)
+        if ((input_into_matrice(tab_game, x, y, val, taille)) == FALSE)
         {
             printf("\nSaisie illégale\n");
         }
@@ -174,12 +200,12 @@ void game(int** tab, int taille)
     } while(resolved == FALSE && HP < 0);
     if (HP == 0)
     {
-        printf("\nGAME LOST\n");
+        printf("\n-+-+-+-+-+-+-+-+-+\nGAME LOST\n-+-+-+-+-+-+-+-+-+\n");
     }
     else if (resolved == TRUE)
     {
-        printf("\nGAME WIN");
+        printf("\n-+-+-+-+-+-+-+-+-+\nGAME WIN\n-+-+-+-+-+-+-+-+-+\n");
     }
     printf("Grille finale :\n");
-    affichage_matrice(tab, taille);
+    affichage_matrice(tab_solu, taille, 1);
 }

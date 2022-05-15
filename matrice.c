@@ -1,6 +1,7 @@
 #include "matrice.h"
 #include <stdio.h>
 #include <stdlib.h>
+
 #define TRUE 1
 #define FALSE 0
 
@@ -110,17 +111,53 @@ void generation_solution(int taille, int** taku_lig){
     }
 }
 
-void creer_masque_aleat() {
+int** creer_masque_aleat(int taille) {
     // Masque qui détermine l'affichage Takuzu utilisateur
+    int** masque = creation_matrice(taille);
+    for(int i=0; i<taille; i++)
+    {
+        for(int j=0; j<taille; j++)
+        {
+            masque[i][j] = rand() % 2;
+        }
+    }
+    return masque;
 }
 
-void creer_masque_spe() {
+int** creer_masque_spe(int taille) {
     // Masque qui détermine l'affichage Takuzu utilisateur
+    return NULL;
 }
 
-void takuzu_utilisateur() {
+int** takuzu_utilisateur(int**tab_sol, int** tab_game, int taille, int choice) {
     // Takuzu visible par l'utilisateur
+    // choice = 1 : masque aleat ; choice = 0 ; masque manuel
     // mettre -1 pour les cases vides, non visible par l'utilisateur mais pour éviter confusion par la machine
-
+    int** grille_masque = NULL;
+    switch (choice)
+    {
+        case 1:
+        {
+            grille_masque = creer_masque_spe(taille);
+            break;
+        }
+        case 2:
+        {
+            grille_masque = creer_masque_aleat(taille);
+            break;
+        }
+    }
+    for (int i = 0; i<taille; i++)
+    {
+        for(int j = 0; j<taille; j++)
+        {
+            if (grille_masque[i][j] == 0)
+            {
+                tab_game[i][j] = -1;
+            }
+        }
+    }
+    return grille_masque;
 }
+
 

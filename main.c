@@ -22,6 +22,7 @@ void main_menu();
  * Menu principal, l'utilisateur à trois choix possible
  */
 void grid_menu();
+int masque_menu();
 
 int main() {
     // initialisation de la seed sur le temps
@@ -98,7 +99,16 @@ void grid_menu()
         {
             int** grille_solution = creation_mat_modele(choice);
             int** grille_jeu = creation_mat_modele(choice);
-            game(grille_jeu, choice);
+
+            int choice_masque = masque_menu();
+
+            printf("\n-+-+-+-+-+-+-+-+-+ MASQUE -+-+-+-+-+-+-+-+-+\n");
+            int** grille_masque = takuzu_utilisateur(grille_solution, grille_jeu, choice, choice_masque);
+            affichage_matrice(grille_masque, choice, 2);
+            printf("\n-+-+-+-+-+-+-+-^^ MASQUE ^^-+-+-+-+-+-+-+-+-\n");
+
+
+            game(grille_jeu, grille_solution, choice);
             sleep(3); // Cooldown : 3 sec le temps qu'il regarde sa grille
             printf("Retour au menu principal");
             libere_matrice(choice, grille_jeu);
@@ -110,4 +120,26 @@ void grid_menu()
         }
     } while (!(choice == 4 || choice == 8));
     //printf("\n-+-+-+-+-+-+-+-+-+\nSortie du grid_menu().\n-+-+-+-+-+-+-+-+-+\n");
+}
+
+int masque_menu()
+{
+    int choice_masque = -1;
+
+    do
+    {
+        printf("Veuillez choisir un type de masque.\n"
+               "1. Masque manuellement saisie.\n"
+               "2. Masque aléatoire.\n"
+               "Choix : \n");
+        scanf("%d", &choice_masque);
+
+        if (!(choice_masque == 1 || choice_masque == 2))
+        {
+            printf("Choix du masque incorrect. Veuillez réessayer.\n");
+        }
+
+    } while (!(choice_masque == 1 || choice_masque == 2));
+
+    return choice_masque;
 }
