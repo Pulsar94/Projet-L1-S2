@@ -118,17 +118,17 @@ void generation_solution(int taille, int** taku_lig){
     int* code_binaire = (int*) malloc(taille * sizeof (int));
     switch (taille) {
         case 4:
-            nbr = rand() % 16;
-            for (i = 0; i < taille; ++i) {
-                // conversion en binaire dans le tableau
-                for(j = 0; nbr > 0; j++)
-                {
-                    code_binaire[j] = nbr % 2;
-                    nbr = nbr/2;
+            do {
+                nbr = rand() % 16;
+                for (i = 0; i < taille; ++i) {
+                    // conversion en binaire dans le tableau
+                    for(j = 0; nbr > 0; j++)
+                    {
+                        code_binaire[j] = nbr % 2;
+                        nbr = nbr/2;
+                    }
                 }
-
-            }
-
+            } while (NULL);
             break;
 
         case 8:

@@ -344,61 +344,60 @@ int grille_pleine(int** tab_sol, int**tab_game, int taille)
     return isCorrect;
 }
 
-int verification_ligne_sol(int** tab_sol){
-    for (int i = 0; i < 2; ++i) {
+int verification_ligne_sol(int** tab_sol, int pos_j, int taille, int val){
+    int cpt =0, i, j;
+    for (i = 0; i < 2; ++i) {
+        switch (i) {
+            case 1:{
+                // droite
+                for (j = pos_j + 1; j < taille; ++j) {
+                    // pas besoin de verifier plus loin que 2 cases
+                    if (cpt > 2){
+                        break;
+                    }
+                    if (tab_sol[j] != val){
+                        break;
+                    }
+                    else {
+                        if (taku_jeu[pos_i][j] == val){
+                            temp += 1;
+                        }
+                    }
+                    // verification pour 2 identiques
+                    if (temp == 2){
+                        return FALSE;
+                    }
+                    cpt += 1;
+                }
+                cpt = 0;
+                break;
+            }
 
+            case 2:{
+                //gauche
+                for (j = pos_j - 1; j >= 0; --j) {
+                    // pas besoin de verifier plus loin que 2 cases
+                    if (cpt > 2){
+                        break;
+                    }
+                    if (taku_jeu[pos_i][j] != val){
+                        break;
+                    }
+                    else {
+                        if (taku_jeu[pos_i][j] == val){
+                            temp += 1;
+                        }
+                    }
+                    // verification pour 2 identiques
+                    if (temp == 2){
+                        return FALSE;
+                    }
+                    cpt += 1;
+                }
+                cpt = 0;
+                break;
+            }
+        }
     }
-        switch (expression) {
-
-        }
-        case 2:{
-            //gauche
-            for (j = pos_j - 1; j >= 0; --j) {
-                // pas besoin de verifier plus loin que 2 cases
-                if (cpt > 2){
-                    break;
-                }
-                if (taku_jeu[pos_i][j] != val){
-                    break;
-                }
-                else {
-                    if (taku_jeu[pos_i][j] == val){
-                        temp += 1;
-                    }
-                }
-                // verification pour 2 identiques
-                if (temp == 2){
-                    return FALSE;
-                }
-                cpt += 1;
-            }
-            cpt = 0;
-            break;
-        }
-
-        case 3:{
-            // droite
-            for (j = pos_j + 1; j < taille; ++j) {
-                // pas besoin de verifier plus loin que 2 cases
-                if (cpt > 2){
-                    break;
-                }
-                if (taku_jeu[pos_i][j] != val){
-                    break;
-                }
-                else {
-                    if (taku_jeu[pos_i][j] == val){
-                        temp += 1;
-                    }
-                }
-                // verification pour 2 identiques
-                if (temp == 2){
-                    return FALSE;
-                }
-                cpt += 1;
-            }
-            cpt = 0;
-            break;
-        }
 
 }
