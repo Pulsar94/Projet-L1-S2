@@ -239,6 +239,19 @@ int verification_nb_iden(int taille, int pos_i, int pos_j, int val, int** taku_j
     return TRUE;
 }
 
+int verif_regles_taku(int** tab_game, int x, int y, int val, int taille)
+{
+    if (verification_cote(val, taille, x, y, tab_game) == TRUE && verification_lig_col(taille, x, y, tab_game) == TRUE &&
+    verification_nb_iden(taille, x, y, val, tab_game) == TRUE)
+    {
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
 int grille_pleine(int** tab_sol, int**tab_game, int taille)
 {
     int i = 0, j = 0;

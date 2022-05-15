@@ -11,6 +11,7 @@ void verification_nb_iden();
 void generation_solution(int, int**);
 int** creer_masque_aleat(int);
 int** creer_masque_spe(int);
+int input_into_masque(int**tab, int x, char y_char, int val, int taille);
 int** takuzu_utilisateur(int**, int**, int, int);
 
 #endif //PROJET_L1_S2_MATRICE_H

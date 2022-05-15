@@ -147,7 +147,7 @@ int** creer_masque_spe(int taille)
         scanf(" %c %d %d", &y, &x, &val);
 
         // VERIF IF INPUT IS LEGAL OR NOT
-        if (((input_into_matrice(masque, x, y, val, taille)) == FALSE) && (sortie_de_zone_input(y, x, val) == FALSE)) {
+        if (((input_into_masque(masque, x, y, val, taille)) == FALSE) && (sortie_de_zone_input(y, x, val) == FALSE)) {
             printf("\nSaisie illégale\n");
         }
     } while (sortie_de_zone_input(y, x, val) == FALSE);

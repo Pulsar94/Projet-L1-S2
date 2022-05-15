@@ -2,6 +2,9 @@
 #include "regles_taku.h"
 #include "game_control.h"
 
+#define INCORECT 4
+#define VALIDE 3
+#define CORRECT 2
 #define TRUE 1
 #define FALSE 0
 char alpha_maj[16] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P'};
@@ -131,7 +134,7 @@ int verif_legal_input(int taille, int x, int y, int val)
   return FALSE;
 }
 
-int input_into_matrice(int**tab, int x, char y_char, int val, int taille)
+int input_into_matrice(int** tab_game, int** tab_solu, int x, char y_char, int val, int taille)
 /*
  * Fonction: input_into_matrice
  * -----------------
@@ -153,10 +156,23 @@ int input_into_matrice(int**tab, int x, char y_char, int val, int taille)
   x--;
   if ((y != -1) && (verif_legal_input(taille, x, y, val) == TRUE))
   {
-      // function verif();
 
-      tab[x][y] = val;
-      return TRUE;
+      if(tab_solu[x][y] == val)
+      {
+          tab_game[x][y] = val;
+          return CORRECT;
+      }
+      else
+      {
+          if (verif_regles_taku(tab_game, x, y, val, taille) == TRUE)
+          {
+              return VALIDE;
+          }
+          else
+          {
+              return INCORECT;
+          }
+      }
   }
   return FALSE;
 }
@@ -180,30 +196,32 @@ void game(int** tab_game, int**tab_solu, int taille)
         printf("\nSaisir une valeur à injecter sous la forme \nCOLONNE(LETTRE) LIGNE(CHIFFRE) 0/1(VALEUR)\nPour sortir du jeu, entrez Z 0 0\nChoix : ");
         scanf(" %c %d %d", &y, &x, &val);
 
+        int bool_input_matrice = input_into_matrice(tab_game, tab_solu, x, y, val, taille);
+
         // VERIF IF INPUT IS LEGAL OR NOT
-        if (((input_into_matrice(tab_game, x, y, val, taille)) == FALSE) && (sortie_de_zone_input(y, x, val) == FALSE) )
+        if ((bool_input_matrice == FALSE) && (sortie_de_zone_input(y, x, val) == FALSE))
         {
             printf("\nSaisie illégale\n");
         }
 
-        /*// VERIF IF INPUT IS VALID OR NOT
-        if (( == TRUE)) // COUP CORRECT ?
+        // VERIF IF INPUT IS VALID OR NOT
+        if (bool_input_matrice == CORRECT) // COUP CORRECT ?
         {
-            printf("-+-+-+-+-+COUP CORRECT !-+-+-+-+-+");
+           printf("-+-+-+-+-+COUP CORRECT !-+-+-+-+-+\n");
         }
         else
         {
-            if ( == FALSE) // COUP INCORRECT ?
+            if (bool_input_matrice == INCORECT) // COUP INCORRECT ?
             {
-                printf("-+-+-+-+-+COUP INCORRECT !-+-+-+-+-+\n Il ne respecte pas les règles du Takuzu !");
+                printf("-+-+-+-+-+COUP INCORRECT !-+-+-+-+-+\n Il ne respecte pas les règles du Takuzu !\n");
                 // INDICE
                 printf("\nVous perdez une vie. Points de vie actuel : %d", HP);
             }
-            else // COUP CORRECT
+            else // COUP VALIDE
             {
-                printf("-+-+-+-+-+COUP VALIDE !-+-+-+-+-+\n Il respecte les règles du Takuzu mais n'est pas la solution.");
+                printf("-+-+-+-+-+COUP VALIDE !-+-+-+-+-+\n Il respecte les règles du Takuzu mais n'est pas la solution.\n");
             }
-        }*/
+        }
         HP = 0;
 
     } while((resolved == FALSE && HP < 0) || sortie_de_zone_input(y, x, val) == FALSE);
