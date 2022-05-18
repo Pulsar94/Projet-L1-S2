@@ -225,7 +225,7 @@ void game(int** tab_game, int**tab_solu, int taille)
     do
     {
         affichage_matrice(tab_game, taille, 1);
-        printf("\nSaisir une valeur à injecter sous la forme \nCOLONNE(LETTRE) LIGNE(CHIFFRE) 0/1(VALEUR)\nPour sortir du jeu, entrez Z 0 0\nChoix : ");
+        printf("\nSaisir une valeur à injecter sous la forme \nCOLONNE(LETTRE) LIGNE(CHIFFRE) 0/1(VALEUR)\nPour sortir du jeu, entrez \033[2;36mZ 0 0\n\033[0;34mChoix :\033[0m ");
         scanf(" %c %d %d", &y, &x, &val);
 
         int bool_input_matrice = input_into_matrice(tab_game, tab_solu, x, y, val, taille, indice);
@@ -244,16 +244,16 @@ void game(int** tab_game, int**tab_solu, int taille)
             // VERIF IF INPUT IS VALID OR NOT
             if (bool_input_matrice == CORRECT) // COUP CORRECT ?
             {
-                printf("-+-+-+-+-+ COUP CORRECT !-+-+-+-+-+\n");
+                printf("\n\033[1;32m-+-+-+-+-+ COUP CORRECT !-+-+-+-+-+\n\033[0m");
             } else {
                 if (bool_input_matrice == INCORECT) // COUP INCORRECT ?
                 {
-                    printf("\033[1;31m-+-+-+-+-+ COUP INCORRECT !-+-+-+-+-+\nIl ne respecte pas les règles du Takuzu !\n\033[0m");
+                    printf("\n\033[1;31m-+-+-+-+-+ COUP INCORRECT !-+-+-+-+-+\nIl ne respecte pas les règles du Takuzu !\n\033[0m");
                     recherche_indice(indice, TRUE);
                     printf("\nVous perdez une vie. Points de vie actuel : %d\n", --HP);
                 } else // COUP VALIDE
                 {
-                    printf("-+-+-+-+-+ COUP VALIDE !-+-+-+-+-+\n Il respecte les règles du Takuzu mais n'est pas la solution.\n");
+                    printf("\n-+-+-+-+-+ COUP VALIDE !-+-+-+-+-+\n Il respecte les règles du Takuzu mais n'est pas la solution.\n");
                 }
             }
         }
